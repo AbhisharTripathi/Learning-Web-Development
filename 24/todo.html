@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+<body>
+    <h1>To Do List App</h1>
+    <input type="text" placeholder="Enter Task">
+    <button id="addBtn">Add Task</button>
+    <ul>
+        <li id="info">Your Task will be shown here.....</li>
+    </ul>
+
+    <script>
+        let inp = document.querySelector("input");
+        let addBtn = document.querySelector("#addBtn");
+        let ul = document.querySelector("ul");
+        let info = document.querySelector("#info");
+
+        addBtn.addEventListener("click", function() {
+            if(inp.value === ""){
+                alert("Enter your task first.");
+                return;
+            }
+            // if(ul.children.length === 1 && ul.children[0].innerText === "Your Task will be shown here....."){
+            //     ul.children[0].remove();
+            // }
+            let newLi = document.createElement("li");
+            newLi.innerHTML = `${inp.value} <button class="delBtn">Delete</button>`;
+            ul.appendChild(newLi);
+            inp.value = "";
+            if(ul.children.length > 1) {
+                info.style.display = "none";
+            }
+        });
+
+        // let delBtns = document.querySelectorAll(".delBtn");
+        // for(delBtn of delBtns) {
+        //     delBtn.addEventListener("click", function() {
+        //         this.parentElement.remove();
+
+        //         if(ul.children.length === 0){
+        //             let newChild = document.createElement("li");
+        //             newChild.innerText = 'Your Task will be shown here.....';
+        //             ul.appendChild(newChild);
+        //         }
+        //     });
+        // }
+        //the upper commented code was not able to add event listener to the newly created buttons or li
+
+        //Therefore we will use Event delegation.
+        ul.addEventListener("click", function(event) {
+            let target = event.target;//event.target gives the object of the element that fired the event.
+            if(target.nodeName === "BUTTON") { //it will check if the button was clicked.
+                target.parentElement.remove(); //it will remove the parent element of the button which is li tag.
+            }
+
+            // if(ul.children.length === 0){
+            //     let newChild = document.createElement("li");
+            //     newChild.innerText = 'Your Task will be shown here.....';
+            //     ul.appendChild(newChild);
+            // }
+            if(ul.children.length === 1) {
+                info.style.display = "";
+            }            
+        });
+    </script>
+</body>
+</html>

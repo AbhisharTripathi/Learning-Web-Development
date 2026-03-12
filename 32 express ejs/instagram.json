@@ -1,0 +1,39 @@
+{
+    "cats":{
+        "name": "cat",
+        "profilepic": "",
+        "followers": 431,
+        "following": 101,
+        "posts": [
+            {
+                "image": "",
+                "likes": 321,
+                "comments": ["very good", "nice", "hello"]
+            },
+            {
+                "image": "",
+                "likes": 242,
+                "comments": ["hii", "excellent", "og"]
+            }
+        ]
+    },
+    "dogs":{
+        "name": "dogs",
+        "profilepic": "",
+        "followers": 743,
+        "following": 287,
+        "posts": [
+            {
+                "image": "",
+                "likes": 382,
+                "comments": ["dog comment1", "dog comment 2", "dog commment 3"]
+            },
+            {
+                "image": "",
+                "likes": 483,
+                "comments": ["dog comment 4", "dog comment 5", "dog comment 6"]
+            }
+        ]
+    }
+    
+}

@@ -1,0 +1,120 @@
+*{
+    font-family:'Courier New';
+}
+
+h1:nth-of-type(1) {
+    color:#B92B27 !important;
+}
+h1,
+h3 {
+    color:rgb(245, 7, 7);
+    /*background-color: rgb(245, 245, 93);*/
+}
+
+#login {
+    color: black;
+    background-color: rgb(193, 193, 250);
+}
+
+#signup {
+    color: white;
+    background-color: #B92B27;
+}
+
+.upvote {
+    color: yellow;
+    background-color: green;
+}
+
+#myId .upvote {
+    background-color: lightblue;
+}
+
+div[id="myId"] h3 {
+    background-color: lightpink;
+}
+
+.post a {
+    color: green;
+    /* background-color:  */
+}
+
+div li > a {
+    color: rgb(233, 14, 50);
+    text-decoration: none;
+}
+
+p + h3 {
+    text-decoration: underline;
+}
+
+button.upvote + button {
+    color: white;
+    background-color: blueviolet;
+}
+
+div > input {
+    background-color: bisque;
+    /* color:bisque; */
+}
+
+input[type="password"] {
+    background-color: lightgreen;;
+}
+
+.upvote:hover {
+    background-color: yellow;
+    color: green;
+}
+
+#login:hover {
+    background-color: darkred;
+    color: lightgreen;
+}
+
+h3:hover {
+    text-decoration: none;
+}
+
+.post:active {
+    font-weight: 800;
+    text-decoration: overline;
+}
+
+.answer:active {
+    background-color:darkslategray;
+    color:ghostwhite;
+}
+
+input[name="agreement"]:checked + label {
+    font-weight:900;
+    color:Red;
+}
+
+main div:nth-of-type(2n+1) {
+    background-color:navajowhite;
+}
+
+main hr + div:nth-of-type(2n) {
+    background-color:rgb(238, 174, 174);
+}
+
+h3::first-letter {
+    font-size:xx-large;
+}
+
+.post::first-line{
+    font-weight:900;
+}
+
+main hr + div:hover {
+    font-size:large;
+    font-weight:900;
+
+}
+
+footer > p::selection {
+    text-decoration: line-through;
+    background-color: rgb(2, 59, 66);
+    color:cornsilk;
+}

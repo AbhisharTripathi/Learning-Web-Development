@@ -1,0 +1,97 @@
+body {
+    text-align: center;
+    background-color: rgb(15, 95, 88);
+}
+
+h1 {
+    font-size: 50px;
+    line-height: 65px;
+    text-shadow: 0 0 15px white;
+}
+
+h2, .score {
+    font-size: 30px;
+    line-height: 40px;
+    text-shadow: 0 0 15px white;
+}
+
+.score {
+    position: relative;
+    top : 30px;
+    text-align:end;
+}
+
+#box {
+    width: 70%;
+    margin: auto;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    grid-gap: 30px 0px;
+}
+.up, .left, .right, .down {
+    height : 100px;
+    width : 200px;
+    display: inline-block;
+    border: 2px solid black;
+    font-weight: 900;
+    font-size:xx-large;
+    line-height: 100px;
+    box-shadow: 7px 7px 2px black;
+    transition: 0.1s ease-in;
+}
+
+.up {
+    background-color: rgb(41, 179, 41);
+    grid-row: 1/2;
+    grid-column: 2/3;
+    border-radius: 30px 30px 0 0;
+}
+
+.left {
+    background-color: rgb(233, 233, 86);
+    grid-row: 2/3;
+    grid-column: 1/2;
+    place-self: end;
+    border-top-left-radius: 30px;
+}
+
+.right {
+    background-color: rgb(65, 65, 235);
+    grid-row: 2/3;
+    grid-column: 3/4;
+    place-self: start;
+    border-top-right-radius: 30px;
+}
+
+.down {
+    background-color: rgb(235, 80, 80);
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.flash {
+    background-color: white;
+    transform: translate(7px,7px);
+    box-shadow: none;
+    transition: 0.1s ease-in;
+}
+
+.red {
+    background-color: rgb(110, 16, 16);
+}
+
+.green {
+    background-color: rgb(17, 102, 21);
+}
+
+.brown {
+    background-color: rgb(80, 95, 15);
+}
+
+#info {
+    background-color: rgb(190, 180, 180);
+    line-height : 40px;
+    border: 2px solid black;
+}

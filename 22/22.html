@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Practice Playground</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="22.css">
+    <style>
+        h1 {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1 id="main-title" class="abc pqr xyz">DOM Practice Playground</h1>
+    <nav>
+        <a href="https://www.goole.com" class="nav-link">Home</a> |
+        <a href="#" class="nav-link">About</a> |
+        <a href="#" class="nav-link">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- TEXT CONTENT -->
+    <section id="text-section">
+        <h2>Text Elements</h2>
+        <p class="description">This is a paragraph for practicing text manipulation.printing less than sign using : &lt;<a href="#" class="nav-link">About</a> <span>hii i am a span</span>
+        <b>bold bold i am bold</b> rest is the future.</p>
+        <p><strong>Bold</strong>, <em>italic</em>, <span class="highlight-text">span</span></p>
+        <button id="change-text-btn">Change Text</button>
+    </section>
+
+    <!-- LIST -->
+    <section id="list-section">
+        <h2>List</h2>
+        <ul id="item-list">
+            <li data-id="1">Item One</li>
+            <li data-id="2">Item Two</li>
+            <li data-id="3">Item Three</li>
+        </ul>
+        <button id="add-item-btn">Add Item</button>
+        <button class="danger" id="remove-item-btn">Remove Item</button>
+    </section>
+
+    <!-- CARDS -->
+    <section id="card-section">
+        <h2>Cards</h2>
+        <div class="card-container">
+            <div class="card" data-type="info">
+                <h3>Card 1</h3>
+                <p>Some information here.</p>
+            </div>
+            <div class="card" data-type="warning">
+                <h3>Card 2</h3>
+                <p>Some information here.</p>
+            </div>
+            <div class="card" data-type="success">
+                <h3>Card 3</h3>
+                <p>Some information here.</p>
+            </div>
+        </div>
+        <button id="toggle-cards-btn">Toggle Cards</button>
+    </section>
+
+    <!-- FORM -->
+    <section id="form-section">
+        <h2>Form</h2>
+        <form id="user-form">
+            <label>Name</label>
+            <input type="text" id="name-input" placeholder="Enter name">
+
+            <label>Email</label>
+            <input type="email" id="email-input" placeholder="Enter email">
+
+            <label>Role</label>
+            <select id="role-select">
+                <option value="">Select role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+
+            <label>Message</label>
+            <textarea id="message-input"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p id="form-output"></p>
+    </section>
+
+    <!-- TABLE -->
+    <section id="table-section">
+        <h2>Table</h2>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Alice</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Bob</td>
+                    <td>Inactive</td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="add-row-btn">Add Row</button>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 DOM Practice</p>
+</footer>
+
+<script src="22.js"></script>
+</body>
+</html>

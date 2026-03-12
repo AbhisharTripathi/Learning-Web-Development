@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get and post request.</title>
+</head>
+<body>
+    <h1>Get request</h1>
+    <form method="get" action="http://localhost:8080/register">
+        <label for="username">Name : </label>
+        <input id="username" name="user" type="text" placeholder="Enter full name"><br>
+        <label for="password" >Password : </label>
+        <input id="password" name="pass" type="password" placeholder="Enter your password"><br>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+    <hr>
+    <h1>Post request</h1>
+    <form method="post" action="http://localhost:8080/register">
+        <label for="username">Name : </label>
+        <input id="username" name="user" type="text" placeholder="Enter full name"><br>
+        <label for="password" >Password : </label>
+        <input id="password" name="pass" type="password" placeholder="Enter your password"><br>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <script src="33OOPS.js"></script>
+</body>
+</html>

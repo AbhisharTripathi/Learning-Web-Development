@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h2>Home page</h2>
+    <a href="/user/new"><button>Add new user.</button></a>
+    <table border="1">
+        <caption>Data of all users.</caption>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(rowObj of results) { %>
+                <tr>
+                    <td><%= rowObj["id"] %></td>
+                    <td><%= rowObj["name"] %></td>
+                    <td><%= rowObj["email"] %></td>
+                    <td><a href="/user/<%= rowObj['id'] %>/edit"><button>Edit</button></a></td>
+                    <td><form method="post" action="/user/<%= rowObj['id'] %>?_method=DELETE"><button>Delete</button></form></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

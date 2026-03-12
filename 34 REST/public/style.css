@@ -1,0 +1,28 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    color: maroon;
+}
+
+.user {
+    font-style: italic;
+}
+
+.content {
+    width: 400px;
+    /* height: calc(1rem + 1.5px); */
+    text-wrap:nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+.post {
+    background-color: rgb(48, 82, 62);
+}
+
+textarea {
+    height: 150px;
+    width: 300px;
+}

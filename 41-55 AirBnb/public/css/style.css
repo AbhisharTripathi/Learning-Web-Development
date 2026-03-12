@@ -1,0 +1,166 @@
+/* *{
+  outline:1px solid red;
+} */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fe424d;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: black;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ebebeb;
+    height: 8rem;
+}
+
+.f-info-socials a {
+    text-decoration: none;
+    color: black;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+/* .f-info-socials {
+    display: flex;
+    justify-content: space-around;
+} */
+
+/* Cards */
+.card {
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card img {
+    border-radius: 1rem;
+    width: 100%;
+    object-fit:cover;
+    height: 15rem;
+}
+
+.card-text {
+    font-weight: 350;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+.card-img-overlay {
+    opacity: 0;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card:hover .card-img-overlay{
+    opacity: 1;
+    text-shadow: 0px 0px 10px white;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 10px black;
+}
+
+/* New page */
+.new-form-btn {
+    background-color: #fe424d;
+    color: white;
+}
+
+.new-form-btn:hover {
+    border-color: #fe424d;
+    color: #fe424d;
+}
+
+/* Edit page */
+.edit-form-btn {
+    background-color: #fe424d;
+    color: white;
+}
+
+.edit-form-btn:hover {
+    border-color: #fe424d;
+    color: #fe424d;
+}
+
+.edit-img {
+    height: 35vh;
+    object-fit: cover;
+    padding: 0px;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 5px black;
+}
+
+/* @media(max-width: 770px) {
+    .edit-img {
+        width: 90%;
+        margin: 0 auto;
+    }
+} */
+
+/* Show page */
+.show-img {
+    height: 35vh;
+    object-fit: cover;
+    padding: 0px;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 5px black;
+}
+
+.details-heading {
+    font-weight: 500;
+}
+
+.show-btn {
+    background-color: #fe424d;
+    color: white;
+    width: 10rem;
+    margin-right: 3rem;
+}
+
+.show-btn:hover {
+    border-color: #fe424d;
+    color: #fe424d;
+}
+
+.show-btns {
+    display: flex;
+    justify-content:start;
+}

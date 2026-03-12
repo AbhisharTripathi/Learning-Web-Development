@@ -1,0 +1,150 @@
+MySQL is a DataBase and SQL is a language used to access the DataBase.
+Relational DataBase (language SQL) :- Data stored in Tables. e.g. MySQL, Oracle, PostgreSQL etc. these are DataBase.
+Non Relational DataBase (Language NoSQL) :- Data stored in Document, Key-value, graphs etc. e.g. MongoDb, Cassandra, Neo4j etc.
+
+SQL :- Structured Query Language is a programming language used to interact with Relational Databases.
+columns -> Schema(Design)
+row -> Tuple(record)
+SQL commands (Queries):-(SQL is case insensitive)
+
+Data Types in SQL :-
+1. CHAR(fixed_size) = can range from 0 to 255
+2. VARCHAR(var_size) = can range from 0 to 255
+3. BLOB(var_size) = used to store string, binary large object
+4. INT = -2B to 2B
+5. TINYINT = -128 to 127 = -2^7 to 2^7 - 1
+6. BIGINT
+7. BIT(X) = X can range from 1 to 64
+8. FLOAT = precision to 23 digits
+9. DOUBLE = 24 to 53 digits precision
+10. BOOLEAN
+11. DATE = yyyy-mm-dd
+12. YEAR
+
+Constraints in SQL :-
+1. NOT NULL = columns can not have a null value.
+2. UNIQUE = all values in column should be different.
+3. DEFAULT default_value = sets the default value of the column.
+4. CHECK = it can limit the values allowed in columns.
+syntax: CONSTRAINT optional_constraint_name CHECK (column_name_1 >= 78 AND column_name = "Delhi")
+5. PRIMARY KEY = makes a column unique and not null but used only for one or set of one.
+syntax: PRIMARY KEY (column_name);  or
+syntax: column_name_4 datatype PRIMARY KEY = write in place of constraint.
+6. FOREIGN KEY = it will prevents action that will destroy links between tables. it can have same & null value and many columns can be foreign key.
+syntax: FOREIGN KEY (column_name_of_this_table) REFERENCES another_table_name(column_name_of_another_table)
+
+A. Database commands(Queries) :-
+
+1. CREATE DATABASE db_name; = to create a database if not exists otherwise give a error.
+2 CREATE DATABASE IF NOT EXISTS db_name; = it will create a database if not exists otherwise give a warning.
+3. DROP DATABASE db_name; = to delete a database.
+4. DROP DATABASE IF EXISTS db_name;
+5. USE db_name; = to perform operations inside a database first you have to use it.
+6. SHOW DATABASES; = to show all the databases.
+
+B. Table commands(Queries) :-
+
+7. SHOW TABLES; = to show all the tables inside a database, it will work after USE db_name; command.
+8. CREATE TABLE table_name (
+	column_name_1 datatype constraint,
+	column_name_2 datatype constraint,
+	column_name_3 datatype constraint
+); = to create a table.
+
+9. INSERT INTO table_name
+	VALUES
+	(value_for_column_1_row_1, value_for_column_2_row_1, value_for_column_3_row_1),
+	(value_for_column_1_row_2, value_for_column_2_row_2, value_for_column_3_row_2),
+	(value_for_column_1_row_3, value_for_column_2_row_3, value_for_column_3_row_3),
+	(value_for_column_1_row_4, value_for_column_2_row_4, value_for_column_3_row_4); = to insert values into a table.
+
+9.1 INSERT INTO table_name
+	(column_name_2, column_name_4)
+	VALUES
+	(value_for_column_2_row_1, value_for_column_4_row_1),
+	(value_for_column_2_row_2, value_for_column_4_row_2),
+	(value_for_column_2_row_3, value_for_column_4_row_3),
+	(value_for_column_2_row_4, value_for_column_4_row_4); = to insert values into a table.
+
+
+10. SELECT * FROM table_name; = to view all column data inside a table;
+11. SELECT column_name_2, column_name_4 FROM table_name; = to view specific column data inside a table;
+12. SELECT DISTINCT column_name_2, column_name_4 FROM table_name; = to view data inside a table distint combined values of col1 and col2;
+
+//WHERE clause :-
+13.	SELECT *
+	FROM table_name 
+	WHERE column_name_1 = 1 AND column_name_2 > 18 OR column_name_3 < 3; //it gives the table_name from current database which satisfies the conditions written after WHERE clause.
+Operators we can use with WHERE clause :-
+(a) Arithmetic operators : +, -, *, /, %
+(b) Comparison operators : =, !=, <, >, <=, >= 
+(c) Logical operators : AND, OR, NOT, IN, BETWEEN, ALL, LIKE, ANY
+(d) Bitwise operators : & (bitwise AND), | (bitwise OR)
+//BETWEEN :- selects for a given range. e.g. WHERE age BETWEEN 12 AND 18; here 12 and 18 both will be included along with the range.
+//IN :- selects which includes it. e.g. WHERE marks IN (67,87,97);
+//NOT :- used to negate the condition. e.g. WHERE marks NOT IN (67,87,97);
+
+//LIMIT cluase :- sets an upper limit on the number of tuples(rows) to be returned.
+14. 	SELECT col1, col2
+	FROM tabel_name
+	LIMIT number_of_rows_we_want;
+
+//ORDER BY clause :- used to return data in ascending(ASC) or descending order(DESC).
+15.	SELECT col1, col2
+	FROM tabel_name
+	ORDER BY column_name(s) DESC;
+
+//Aggregate functions :- Aggregate functions perform a calculation on set of values and return a single value.
+MAX(), MIN(), SUM(), COUNT(), AVG()
+16.	SELECT MAX(column_name)
+	FROM table_name;
+
+//GROUP BY clause :- group rows that have the same values into summary rows. It collects data from multiple records and group the result by one or more column.Generally we use GROUP BY with some aggregate functions.
+17.	SELECT age, COUNT(id)
+	FROM table_name
+	GROUP BY age; //it will group the rows that have same age's value. then, print the age and count of id's in that group.You can only give those columns to print on which you make the group but you can pass other column inside aggregate function to get a single value in return from that column. Consider making a group with the title you gave in GROUP BY clause then making a table with these title as a row, it means number of rows will be equal to the number of groups.
+e.g.	SELECT courseid, name, COUNT(courseid)
+	FROM students
+	GROUP BY courseid, name;
+
+//HAVING clause :- It is used when we want to apply any condition after grouping. WHERE is for a table, HAVING is for a group. Grouping is necessary for HAVING.
+18.	SELECT col1, MAX(col2)
+	FROM table_name
+	GROUP BY col1
+	HAVING MAX(col2) > 18; //it is a condition on the group.
+
+//General Order for writing multiple clause :-
+SELECT column(s)
+FROM table_name
+WHERE condition
+GROUP BY column(s)
+HAVING condition
+ORDER BY column(s) ASC;
+
+Table Queries :-
+19. SET SQL_SAFE_UPDATES = 0; //This will allow you to update your database, it is by default 1 which doesn't allow you to update the database. By the way it is not working.
+20.	UPDATE table_name 
+	SET col1 = val1, col2 = val2
+	WHERE condition; = to update the existing rows.
+
+21.	DELETE FROM table_name
+	WHERE condition; = to delete existing rows. if you do not use WHERE clause it will delete all rows.
+
+
+//To change the schema. column (name, datatype, constraint, add, delete)
+22.	ALTER TABLE table_name
+	ADD COLUMN column_name datatype constraint; = to add new column.
+
+23.	ALTER TABLE table_name
+	DROP COLUMN column_name; = to delete a column.
+
+24.	ALTER TABLE table_name
+	CHANGE COLUMN old_name new_name new_datatype new_constraint; = to change a column.(rename) but you have to define datatype and constraint again.
+
+25.	ALTER TABLE table_name
+	MODIFY column_name new_datatype new_constraint; = to modify the datatype and constraint.
+
+24.	ALTER TABLE table_name
+	RENAME TO new_name_for_table; = to rename the table.
+
+25.	TRUNCATE TABLE table_name; = to delete tables data, it will not change schema.

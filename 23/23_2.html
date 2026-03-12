@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity</title>
+</head>
+<body>
+    <h1>Color's rgb value will be shown here..</h1>
+    <button>Generate color.</button>
+    <div>
+        <h2>You color will be displayed here.</h2>
+    </div>
+
+    <script>
+        let h1 = document.querySelector("h1");
+        let btn = document.querySelector("button");
+        let div = document.querySelector("div");
+
+        div.style.height = "200px";
+        div.style.width = "75%";
+        div.style.marginLeft = "12%";
+        div.style.border = "2px solid black";
+    
+        btn.addEventListener("click", () => { 
+            div.innerText = "Double click it!";
+        });
+        btn.addEventListener("dblclick", () => {
+            let color = "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")";
+            console.log(color);
+            console.log(typeof color);
+            div.style.backgroundColor = color;
+            h1.innerText = color;
+            div.innerText = "This is your new color.";
+        });
+
+
+    </script>
+</body>
+</html>

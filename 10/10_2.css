@@ -1,0 +1,30 @@
+h1 {
+    background-color: yellow;
+    border: 2px solid black;
+}
+
+div {
+    background-color: pink;
+    border: 2px solid red;
+}
+
+@media(min-width: 800px) {
+    h1 {
+        background-color: green;
+    }
+    div {
+        background-color: purple;
+    }
+}
+
+@media(min-width: 550px) and (max-width: 600px) {
+    h1, div {
+        display: none;
+    }
+}
+
+@media(orientation: landscape) {
+    h1 {
+        background-color: magenta;
+    }
+}

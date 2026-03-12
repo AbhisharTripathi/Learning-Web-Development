@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= results[0]["name"] %></title>
+</head>
+<body>
+    <form method="post" action="/user/<%= id %>?_method=PATCH">
+        <label for="name">Your name : </label>
+        <input type="text" value="<%= results[0]['name'] %>" id="name" name="name">
+        <br>
+        <label for="email">Your email : </label>
+        <input id="email" type="email" name="email" value="<%= results[0]['email'] %>">
+        <br>
+        <label for="password">Enter your password : </label>
+        <input id="password" name="password" type="password" placeholder="Required">
+        <button>Save Changes</button>
+    </form>
+</body>
+</html>

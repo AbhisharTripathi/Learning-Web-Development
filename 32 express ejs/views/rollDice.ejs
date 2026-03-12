@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll Dice</title>
+</head>
+<body>
+    
+    <h1>Dice gave : <%= val %></h1><!--html escaped-->
+    <h1>Dice gave : <%= diceVal2 %></h1>
+
+    <!--Embedding control flow satements.(scriptlet tag)-->
+    <% if(diceVal2 == 6) { %> <!--You write starting curly bracket here-->
+
+        <h2>You can roll dice agian.</h2> <!--This Html code will render only when condition is satisfied.-->
+
+    <% } %> <!--and ending curly bracket here.-->
+    <h1>All players name.</h1>
+    <ol>
+        <% players.forEach((el) => { %>
+            <li><%= el %></li>
+        <% }) %>
+    </ol>
+    
+</body>
+</html>

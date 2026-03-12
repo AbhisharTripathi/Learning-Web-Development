@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(15, 95, 88);
+        }
+
+        h1 {
+            font-size: 50px;
+            line-height: 65px;
+            text-shadow: 0 0 15px white;
+        }
+
+        h2, .score {
+            font-size: 30px;
+            line-height: 40px;
+            text-shadow: 0 0 15px white;
+        }
+
+        .score {
+            position: relative;
+            top : 30px;
+            text-align:end;
+        }
+
+        #box {
+            width: 70%;
+            margin: auto;
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            place-items: center;
+            grid-gap: 30px 0px;
+        }
+        .up, .left, .right, .down {
+            height : 100px;
+            width : 200px;
+            display: inline-block;
+            border: 2px solid black;
+            font-weight: 900;
+            font-size:xx-large;
+            line-height: 100px;
+            box-shadow: 7px 7px 2px black;
+            transition: 0.1s ease-in;
+        }
+
+        .up {
+            background-color: rgb(41, 179, 41);
+            grid-row: 1/2;
+            grid-column: 2/3;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .left {
+            background-color: rgb(233, 233, 86);
+            grid-row: 2/3;
+            grid-column: 1/2;
+            place-self: end;
+            border-top-left-radius: 30px;
+        }
+
+        .right {
+            background-color: rgb(65, 65, 235);
+            grid-row: 2/3;
+            grid-column: 3/4;
+            place-self: start;
+            border-top-right-radius: 30px;
+        }
+
+        .down {
+            background-color: rgb(235, 80, 80);
+            grid-row: 2/3;
+            grid-column: 2/3;
+        }
+
+        .flash {
+            background-color: white;
+            transform: translate(7px,7px);
+            box-shadow: none;
+            transition: 0.1s ease-in;
+        }
+
+        .red {
+            background-color: rgb(110, 16, 16);
+        }
+
+        .green {
+            background-color: rgb(17, 102, 21);
+        }
+
+        .brown {
+            background-color: rgb(80, 95, 15);
+        }
+
+        #info {
+            background-color: rgb(190, 180, 180);
+            line-height : 40px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>SIMON SAYS GAME</h1>
+    <h2 id="info">Press any button to Start new game... 😎</h2>
+    <h2 id="level">Level 1</h2><br>
+    <div id="box">
+        <div class="up" >Up</div>
+        <div class="left">Left</div>
+        <div class="right">Right</div>
+        <div class="down">Down</div>
+    </div>
+
+    <div class="score">HS: 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    
+
+    <script>
+        let mode = "start";
+        let level = 1;
+        let seq = "";
+        let inp = "";
+        let charNo=0;
+        // let id;
+        let highScore = "00";
+        let inpCounter = 0;
+
+        let map = {
+            "ArrowUp" : 0,
+            "ArrowLeft" : 1,
+            "ArrowRight" : 2,
+            "ArrowDown" : 3
+        };
+
+        alert("Darne ki koi bat nahi hai.\nINFORMATION :-\nUse the arrow keys to play the game.");
+
+        let body = document.querySelector("body");
+        let colors = document.querySelectorAll("#box div");
+        let info = document.querySelector("#info");
+        let lev = document.querySelector("#level");
+        let score = document.querySelector(".score");
+
+        document.addEventListener("keydown", simon);
+
+        function simon(event) {
+            // lev.innerText = `Level ${level}`;
+            if(mode === "wait") return;
+            else if(mode === "input") {
+                console.log("entered input.");
+                mode = "wait";
+                inpCounter++;
+                inp += map[event.code];
+                colors[map[event.code]].classList.add("flash");
+                setTimeout(()=>{colors[map[event.code]].classList.remove("flash");}, 200);
+                if(inp[inpCounter - 1] !== seq[inpCounter - 1]){
+                    body.classList.add("red");
+                    info.innerText = "Game Over! 🔫 Press any key to show result...🎬";
+                    mode = "showResult";
+                }
+                else if(inpCounter === level) {
+                    body.classList.add("green");
+                    info.innerText = "Correct Input! 👍 Press any key to play next level...⏭️";
+                    mode = "start";
+                    level++;
+                    inpCounter = 0;
+                }
+                else mode = "input";
+            }
+            else if(mode === "start") {
+                console.log("entered start.");
+                body.classList.remove("green");
+                body.classList.add("brown");
+                lev.innerText = `Level ${level}`;
+                info.innerText = `Level: ${level} started... Observe the Sequence... 👀👀`;
+                mode = "wait";
+                let random = Math.floor(Math.random() * 4);
+                seq += random;
+                charNo = 0;
+                let id = setInterval(showColor, 1000);
+
+                function showColor() {
+                    //console.log("showColor");
+                    colors[seq[charNo]].classList.add("flash");
+                    setTimeout(function() {colors[seq[charNo - 1]].classList.remove("flash");}, 200);
+                    if(charNo === seq.length - 1) {
+                        //console.log("charNo == seq.length - 1");
+                        mode = "input";
+                        setTimeout(()=>{
+                            body.classList.remove("brown");
+                            info.innerText = "Repeat the sequence using arrow key...";
+                        }, 800);
+                        inp = '';
+                        inpCounter = 0;
+                    }
+                    charNo++;
+                    //console.log("charno increased;")
+                }
+                setTimeout(()=>{clearInterval(id);}, 1000 * (seq.length));
+            }
+            else if(mode === "showResult") {
+                console.log("entered showResult.");
+                body.classList.remove("red");
+                info.innerText = `Your Score is ${level - 1}. Press any key to continue.👏`;
+                //highScore = "" + (level-1 > 9) ? (level - 1) : "0" + (level - 1);
+                if(level - 1 > highScore) {
+                    if(level-1 > 9) highScore = "HS: " + (level - 1) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                    else highScore = "HS: 0" + (level - 1) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+                // console.log(highScore);
+                score.innerHTML = highScore;
+                mode = 'reset';
+                
+            }
+            else if(mode === "reset") {
+                console.log("entered reset.");
+                level = 1;
+                inp = "";
+                mode = "start";
+                seq = "";
+                info.innerText = "Press any button to Start new game...🔄️";
+                lev.innerText = `Level ${level}`;
+            }
+        }
+    </script>
+</body>
+</html>

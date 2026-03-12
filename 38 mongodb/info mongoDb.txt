@@ -1,0 +1,54 @@
+1. clrl + k / cls = to clear the shell.
+show dbs = to show all databases.
+2. exit / quit = to exit the shell
+Mongodb provide a db named test when we start the shell.
+3. use db_name = used to start using the database if exist otherwise create it and start using it.
+the created database will not be permanent until we add data in it. The moment we add data in it, will become permanent.
+4. db = shows the name of current database.
+BSON : Binary JSON : JSON failed due to text format and space inefficient. BSON solves this and also provide more datatypes.
+In mongo ans sql : db = db, table = collection, row = document.
+Document contains key-value pairs.
+5. show collections = it shows all the connctions in the database.
+6. db.collection_name.insertOne(JSObj) = to insert one document in the collection.
+If a collection doesn't exist mongodb creates the collection you first store data in it.
+Mongodb automatically assigns a id to the document and this id is the primary key.
+7. db.collection_name.find() = gives all the data of the collection. return array of objects(document)
+It does not impose any boundation on storing key-value pairs. i.e. it will allow you to store different key-value pair in different document in same collection.
+8. db.collection_name.insertMany(Array_of_objects) = to insert multiple document in the collection.
+9. db.collection_name.find( {key1: value1, key2: value2}) = it will give data of all those documents in the collection where the value of key1 is value1 and value of key2 is value2. it return a array . it return a cursor.
+10. db.collection_name.findOne( {key1: value1, key2: value2} ) = it will return one document. actual document, return a object.
+We have many query operators in mongodb:-
+a) comparison operators: $eq, $ne, $gt, $gte, $lt, $lte, $in, $nin
+e.g. db.collection_name.find( { key1: {$gt: value1} } ) = it will give all the collection in which value of key1 is greater than value1.
+e.g. db.collection_name.find( {key1: {$in: [value1, value2, value3] } }) = it will give all the collection in which value of key1 exists in the written array.
+
+b) Logical operator: $and, $not, $or, $nor
+e.g. db.student.find( { $or: [{ marks: {$gt: 75} }, { age: {$gte: 18} }] } )
+
+11. db.collection_name.updateOne(<filter>, <update>, <options>) = updates at most single document that match a specified filter even though multiple documents may match the specified filter.
+e.g. db.collection_name.updateOne( {key1: value1}, {$set: {key1: value2, key2: value3}} )
+
+Update operators:-
+$addFields, $set, $project, $unset, $replaceRoot, $replaceWith
+
+12. db.collection_name.updateMany(<filter>, <update>, <options>) = Update all the document that match a specified filter.
+e.g. db.student.updateMany( {marks: {$gte: 90}}, {$set: {grade: "A+"}})
+
+13. db.collection_name.replaceOne(<filter>, <update>) = replace at most a single document that match a specified filter even though multiple documents may match the specified filter. The id remains same.
+e.g. db.student.replaceOne({name: "Sugriv"}, {name: "Mandodari", age: 78, marks: 68})
+
+We can also do nesting in Mongodb
+college> db.student.find({"performance.marks": 88})
+[
+  {
+    _id: ObjectId('69a3133627b4dab4a67c2907'),
+    name: 'Lakshaman',
+    age: 15,
+    performance: { marks: 88, grade: 'A' } //here we performed nesting.
+  }
+]
+
+14. db.collection_name.deleteOne(<filter>, <options>) = to delete one document that pass the filter.
+15. db.collection_name.deleteMany(<filter>, <options>) = to delete all the documents that pass the filter.
+16. db.dropDatabase() = to delete the database.
+17. db.collection_name.deleteMany({}) = to empty the collection

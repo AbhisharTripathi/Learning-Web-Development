@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+    <h3 class="mt-4 mb-4">All Listings</h3>
+    <!-- <form method="GET" action="/listings/new"><button>Add new Listing</button></form> -->
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+        <%for(let listing of allListings) { %>
+            <div class="col">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card" >
+                        <img src="<%= listing.image+'?w=500&h=240&q=75&auto=format&fit=crop' %>" class="card-img-top" alt="Image is present here" loading="lazy">
+                        <div class="card-img-overlay">&#9825; &#9829;</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b><%= listing.title %></b>
+                                <br>
+                                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</body>
+
+<!-- <img
+  src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=75&auto=format&fit=crop"
+  srcset="
+    https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=300&q=75&auto=format&fit=crop 300w,
+    https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=75&auto=format&fit=crop 600w,
+    https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=75&auto=format&fit=crop 900w
+  "
+  sizes="(max-width: 768px) 100vw, 33vw"
+  alt="Interior"
+  loading="lazy"
+  style="height:20rem;width:100%;object-fit:cover;"
+
+
+
+  <div class="img-wrapper">
+  <img class="placeholder"
+       src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=20&blur=50&q=10">
+
+  <img class="real"
+       src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500&h=240&fit=crop&q=75&auto=format"
+       loading="lazy">
+</div>
+> -->

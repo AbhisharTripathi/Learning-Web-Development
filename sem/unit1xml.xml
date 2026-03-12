@@ -1,0 +1,36 @@
+<!-- prolog -->
+<!-- xml declaration -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!--processing instruction-->
+<?xml-stylesheet type="text/xml" href="unit1xsl.xsl"?>
+<!-- document type declaration -->
+
+<students>
+    <student gender="M">
+        <name>Ram Raghuvanshi</name>
+        <id>71</id>
+        <subjects>
+            <subject>Archory</subject>
+            <subject>Gratitude</subject>
+            <subject>Politics</subject>
+        </subjects>
+    </student>
+    <student gender="F">
+        <name>Sita Janaki</name>
+        <id>72</id>
+        <subjects>
+            <subject>Beautiful</subject>
+            <subject>Humble</subject>
+            <subject>Ideal Wife</subject>
+        </subjects>
+    </student>
+    <student gender="M">
+        <name>Lakshman Raghuvanshi</name>
+        <id>73</id>
+        <subjects>
+            <subject>Archory</subject>
+            <subject>Brotherhood</subject>
+            <subject>Sacrifice</subject>
+        </subjects>
+    </student>
+</students>

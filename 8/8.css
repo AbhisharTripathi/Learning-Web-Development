@@ -1,0 +1,146 @@
+* {
+    background-color: lightblue;
+}
+
+#alpha {
+    background-color: rgba(138, 44, 226,1);
+}
+
+#opacity {
+    background-color: red;
+    opacity: 1;
+}
+
+button {
+    display: inline-block;
+    height: 5em;
+    width: 5em;
+    margin: 3em;
+    background-color: gold;
+    border: 2px solid black;
+    transition: 5s;
+    /* border-radius: 50%; */
+}
+
+button:hover {
+    background-color: aqua;
+    border-radius: 50%;
+    transition: 2s;
+}
+
+#transition {
+    height: 15em;
+    width: 15em;
+    text-align:center;
+    background-color:tomato;
+    border: 2px solid black;
+    border-radius: 50%;
+    transition: transform 3s ease-in 0.3s;
+}
+
+#transition:hover {
+    background-color:olivedrab;
+    transform: translateY(200px);
+    
+}
+
+div.transform {
+    height: 100px;
+    width: 300px;
+    margin: 10px auto;
+    border: 2px solid black;
+    text-align: center;
+}
+
+div:nth-of-type(2n) {
+    background-color: lightseagreen;
+}
+
+div:nth-of-type(2n-1) {
+    background-color: limegreen;
+}
+
+#one {
+    transform: rotate(45deg);
+}
+
+#two {
+    transform: scale(0.33,1);
+}
+
+#three {
+    transform: translate(314px,114px);
+}
+
+#four {
+    transform: skew(45deg);
+}
+
+#five {
+    transform: rotate(90deg) scale(1.5) translateX(117px);
+}
+
+#bs {
+    height: 100px;
+    width: 200px;
+    border: 2px solid black;
+    border-radius: 40px;
+    border-top-right-radius: 3px;
+    text-align: center;
+    box-shadow: 1px 1.5px 4px black;
+    transition: 0.5s ease-in;
+}
+
+#bs:hover {
+    box-shadow: 10px 15px 20px black;
+    transform: scale(1.05);
+}
+
+#face {
+    position:relative;
+    left: 20px;
+    top: 40px;
+    height:250px;
+    width: 250px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: rgb(250, 234, 7);
+}
+
+#face .eye {
+    height: 35px;
+    width: 35px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    top: 70px;
+    display: inline-block;
+}
+
+#face #left {
+   left: 60px;
+}
+
+#face #right {
+    right: 60px;
+}
+
+#mouth {
+    width: 125px;
+    height: 40px;
+    background-color: red;
+    border-radius: 0 0 50% 50%;
+    border: 1px solid black;
+    position: absolute;
+    bottom: 50px;
+    left: 62px;
+}
+
+#bgi {
+    background-color: aqua;
+    width: 300px;
+    height: 300px;
+    background-image: url("tom.jpg");
+    background-size: cover; /*contain, auto(default), cover*/
+}

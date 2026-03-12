@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Loader</title>
+    <style>
+        body {
+            text-align : center;
+            background-color : rgb(15, 95, 88);
+        }
+        .loader {
+            height : 150px;
+            width : 150px;
+            border : 20px solid rgb(226, 216, 216);
+            border-radius : 50%;
+            margin : auto;
+            background-color: rgba(255, 255, 255, 0);
+            display: grid;
+        }
+        .inside {
+            place-self: center;
+            background-color: chocolate;
+            height : 150%;
+            width : 25%;
+            position : relative;
+            /* left : 45%; */
+            /* top: 45%; */
+            animation: loaderAnime 2s 0s infinite alternate;
+        }
+
+        @keyframes loaderAnime{
+            from{
+                transform: none;
+            }
+            to {
+                transform:rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Loader</h1>
+    <div class="loader"><div class="inside"></div></div>
+</body>
+</html>

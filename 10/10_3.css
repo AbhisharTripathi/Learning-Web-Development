@@ -1,0 +1,54 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body > h1 {
+    color: red;
+    margin: 10px;
+}
+
+h2 > span {
+    color: limegreen;
+}
+
+body > h2 {
+    font-size: 50px;
+    margin: 10px;
+}
+
+.card {
+    /* display: inline-block; */
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 350px;
+    /* height : 400px; */
+}
+
+.card > img {
+    width: 96%;
+    /* height: 350px; */
+    border-radius: 20px 20px 0 0;
+    padding: 2%;
+
+}
+
+.card > p {
+    padding: 0px 2%;
+    margin: 5px;
+}
+
+.card > h3 {
+    margin: 0px 2%;
+}
+
+#cardcontainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+@media(max-width: 375px){
+    #cardcontainer{
+        flex-wrap: wrap;
+    }
+}

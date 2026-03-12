@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>All Chats</h1>
+    <hr>
+    <div>
+        <% for(let chat of allChats) { %>
+            <h3>From : <%= chat.from %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To : <%= chat.to %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time : <%= chat.created_at.toString().split(" ")[4] %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On : <%= chat.created_at.toString().split(" ").slice(0,4).join("-") %></h3>
+            <p><%= chat.message %></p>
+            <hr>
+        <% } %>
+    </div>
+</body>
+</html>

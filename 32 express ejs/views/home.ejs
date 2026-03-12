@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+<body>
+    <h1>This is the home page.</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus saepe corrupti fugiat blanditiis nam asperiores provident facilis voluptates laudantium, id dolorem at repellat, omnis molestiae. Officiis totam consectetur veniam nemo voluptas reprehenderit!</p>
+    <button>Click</button>
+    <h2>Interpolation syntax</h2>
+    <ul type="square">
+        <li>10 % 3 = <%= 10 % 3 %> </li> <!--Outputs the value(in string format, html escaped) into the template.-->
+        <li><%= ["Welcome", "Namaste", "SalamWalekum"].reduce((el, rv) =>( el + rv), "") %></li>
+        <li><%= ["Welcome", "Namaste", "SalamWalekum"].map((el) => (el.toUpperCase())) %></li>
+    </ul>
+
+    <%- include("./includes/footer.ejs") %><!--Outputs the unescaped value into the template.-->
+</body>
+</html>
