@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 // const methodOverride = require("method-override");
+const ExpressError = require("./ExpressError.js");
 
 //schemas
 const Chat = require("./models/chat.js");
@@ -30,7 +31,21 @@ app.get("/chats", async (req, res) => {
     res.render("index.ejs", { allChats });
 });
 
+app.get("/chats/:id", async (req, res, next) => {
+    let { id } = req.params;
+    let chat = await Chat.findById(id);
+    if(!chat) {
+        // throw new ExpressError(500, "Async funtion error.");
+        next(new ExpressError(500, "Async funtion error."));//Both works but this was recommended by the teacher. also all this code should be inside the try catch block so that any error send by mongoose e.g. if id's length is not correct can also be handles using the try catch block.
+    }
+    res.send(chat);
+});
 
+//All error handler.
+app.use((err, req, res, next) => {
+    let { status = 500, message = "Default set for error."} = err;
+    res.status(status).send(message);
+});
 
 app.get("/", (req, res) => {
     res.send("This is your root path.");

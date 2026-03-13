@@ -12,6 +12,7 @@
         <% for(let chat of allChats) { %>
             <h3>From : <%= chat.from %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To : <%= chat.to %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time : <%= chat.created_at.toString().split(" ")[4] %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On : <%= chat.created_at.toString().split(" ").slice(0,4).join("-") %></h3>
             <p><%= chat.message %></p>
+            <p>id : <%= chat._id %></p>
             <hr>
         <% } %>
     </div>
