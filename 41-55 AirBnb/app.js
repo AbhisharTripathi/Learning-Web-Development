@@ -85,6 +85,9 @@ app.get("/listings/:id/edit",wrapAsync(async (req, res) => {
 //Update Route
 app.put("/listings/:id", async (req, res, next) => {
     let { id } = req.params;
+    if(!req.body.listing) {
+        throw new ExpressError(400, "Send valid data for Listing.");
+    }
     try {
         await Listing.findByIdAndUpdate(id, {...req.body.listing});
     }
@@ -136,7 +139,9 @@ app.use((req, res, next) => {
 //Handling error
 app.use((err, req, res, next) => {
     let { status = 500, message = "Something went wrong!"} = err;
-    res.status(status).send(message + "<br>Error name : " + err.name);
+    // res.status(status).send(message + "<br>Error name : " + err.name);
+
+    res.status(status).render("error.ejs", { message, stack: err.stack });
 });
 
 app.listen(8080, () => {
