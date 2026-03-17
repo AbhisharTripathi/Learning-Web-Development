@@ -43,13 +43,13 @@ let sub = function(a, b) { //hoisting does not work with these function.
 //function inside a object is known as method.
 let obj = {
     nam: "ram",
-    kam: "berojgar",
-    batao: function(x) { //to use this function write obj.batao(56);
+    work: "unemployed",
+    func1: function(x) { //to use this function write obj.func1(56);
         console.log(obj.nam);
         console.log(x);
     },
 
-    jaldibatao(){
+    func2(){
         console.log("This is a shorthand to define a method inside a object.");
     }
 }
