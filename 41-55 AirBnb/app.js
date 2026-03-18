@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 app.engine("ejs", ejsMate);
 
@@ -18,6 +19,18 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 // This tells Express to serve everything inside the "bootstrap-5.3.8-dist" folder
 app.use('/bootstrap', express.static(path.join(__dirname, 'bootstrap-5.3.8-dist')));
+
+
+const validateListing = (req, res, next) => {//we can use this middleware in update and create route but we only used this in update route because we used another form of joi validation for create route but this is better than that.
+    let { error: validationError } = listingSchema.validate(req.body);
+    if(validationError) {
+        let errMsg = validationError.details.map((el) => (el.message)).join(", ");//details is an array of objects, and each object contains a message property.
+        throw new ExpressError(400, errMsg);
+    } 
+    else {
+        next();
+    }
+};
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 main().then(() => {
@@ -52,10 +65,15 @@ app.get("/listings/new", (req, res) => {
 
 //Create route
 app.post("/listings", wrapAsync(async (req, res) => {
-
-    if(!req.body.listing) {
-        throw new ExpressError(400, "Send valid data for Listing.");
+    let validationResult = listingSchema.validate(req.body);//this is used to validate the req.body with the listingSchema that we defined using Joi. it will not automatically throw the error.
+    // console.log(validationResult);//this is the result it produces.
+    if(validationResult.error) { //if error exists in the validation result
+        throw new ExpressError(400, validationResult.error); //it will throw the error by taking message from validationResult.error
     }
+
+    // if(!req.body.listing) { //this is not required as we are using joi.
+    //     throw new ExpressError(400, "Send valid data for Listing.");
+    // }
 
     // let {title, location, country, image, price, description} = req.body;
     // let listing = new Listing({
@@ -83,11 +101,11 @@ app.get("/listings/:id/edit",wrapAsync(async (req, res) => {
 }));
 
 //Update Route
-app.put("/listings/:id", async (req, res, next) => {
+app.put("/listings/:id", validateListing, async (req, res, next) => {//here the validateListing middleware is used.
     let { id } = req.params;
-    if(!req.body.listing) {
-        throw new ExpressError(400, "Send valid data for Listing.");
-    }
+    // if(!req.body.listing) { //we don't need this now as we are using joi.
+    //     throw new ExpressError(400, "Send valid data for Listing.");
+    // }//we can write this condition check for every listing info to check for their presence and throw different error for each of them.
     try {
         await Listing.findByIdAndUpdate(id, {...req.body.listing});
     }
@@ -147,3 +165,6 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
     console.log("Server is listening on port 8080.");
 });
+
+
+//wrapAsync is better than try catch

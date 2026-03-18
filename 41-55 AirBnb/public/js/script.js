@@ -1,3 +1,4 @@
+//For using form validation using bootstrap.
 (() => {
     "use strict";
 
