@@ -1,0 +1,72 @@
+Day 28: BASIC TERMINAL COMMANDS :-
+ls = list files
+pwd = print working directory
+clear
+cd = change directory
+cd .. = change directory to parent
+we can also give path as ../../..
+relative path : folderOrFileInWorkingDirectory/nextFolder/distinationFileOrFolder
+absolute path : /Users/dell/Desktop
+/ : root directory (in my case its /c)
+~ : home directory
+. : your working directory
+mkdir = make directory
+flags : flags are characters that we pass with commands to modify their behaviour.
+man anyCommand = Give mannual about anyCommand
+touch = The touch command sets the modification and access times of files. If any file does not exist it is created with defalut permission.
+rm = remove files.
+rmdir = remove empty directory
+rm -rf = remove any dirctory, -rf = reccursiveDelete force
+
+
+Day 29: Git and Github
+git config --globalORlocal user.name "your name"
+git config --globalORlocal user.email "you@example.com"
+git config --list
+git clone <-link-> = to download files from github in local system from remote area.
+git status = utracked/ unmodified/ modified/ staged
+untracked -(add)- staged
+unmodified -(edit the file)- modified
+modified -(stage the file)- staged
+staged -(commit)- unmodified
+unmodified -(remove)- untracked
+
+git add <-file name-> = adds new files or changed files from your working directory to git staging area.
+git add . = will add all files in staging area.
+git commit <-file name-> -m "<-Your commit message->" = it is the record of change. Do not give file name if you want to commit all file.
+git push origin main = upload local repo content to remote repo origin. Origin need to be set, it is already set if you cloned a repo.
+
+git init = used to create a new git repository
+git remote add origin <-link-> 
+git remote -v = To verify remote.
+git branch = To check all branches and your current branch.
+git branch -M main = To rename branch to main
+git push -u origin main = It set the default push location to origin main. -u means upstream. Once you run this command you can just use 'git push' instead of 'git push origin main'
+
+If you have done only modification and no new file is created you can directly add and commit using this command:-
+git commit -am "Your commit message"
+
+git checkout -b <-new branch name-> = To create a new branch.
+git checkout <-branch name-> = To navigate to the existing branch.
+git branch -d <-branch name-> = To delete the branch.
+git diff <-branch name-> = To compare commits, branches, files & more.
+git merge <-branch name-> = To merge two branches.
+or create a pull request using github
+
+git pull origin main = Used to fetch and download content from a remote repo and immediately update the local repo to match the content.
+
+git reset <-file name-> = To unstage a single file.
+git reset = To unstage all files in staging area.
+git reset HEAD~1 = To uncommit changes for one commit.
+git reset <-commit hash-> = To uncommit more than one commit.
+git reset --hard <-commit hash-> = To also remove all the changes that are seen even after uncommiting.
+
+git log = To check all info about commits.
+
+Fork is a new repository that shares code and visibility settings with the original upstream repository.
+Fork is a rough copy.
+
+git pull origin main --rebase = use if you commit something on the github and you didn't pull it before commiting on your local system it will pull the code from remote repo then put your commit on top of it.
+
+git push origin main --force = if you want to overwrite the remote repo.
+git rm --cached <directory_name> = to remove submodule entry from the index.
