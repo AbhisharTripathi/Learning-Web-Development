@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./model/listing.js");
+const Review = require("./model/review.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -134,6 +135,56 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
     let listing = await Listing.findById(id);
     res.render("listings/show.ejs", { listing });
 }));
+
+//Reviews
+//POST Route
+app.post("/listings/:id/reviews", wrapAsync(async (req, res, next) => {
+    let { id } = req.params;
+    let listing = await Listing.findById(id);
+    if(!listing) {
+        throw new ExpressError(404, "Listing not found.");
+    }
+    let newReview = new Review(req.body.review);
+    await newReview.save();
+    listing.reviews.push(newReview._id);
+    let resListing = await listing.save();
+    await resListing.populate("reviews")
+    // res.send(resListing);
+    res.redirect(`/listings/${id}`);
+}));
+
+/*
+//This code contains use of transaction which is not supported on standalone db it requires replica set.
+app.post("/listings/:id/reviews", wrapAsync(async (req, res, next) => {
+    let { id } = req.params;
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+        let listing = await Listing.findById(id).session(session);
+        if(!listing) {
+            throw new ExpressError(404, "Listing not found.");
+        }
+        let newReview = new Review(req.body.review);
+        await newReview.save({session});
+        listing.reviews.push(newReview._id);
+        let resListing = await listing.save( {session });
+        await session.commitTransaction();
+        await resListing.populate("reviews")
+        res.send(resListing);
+    }
+    catch(err) {
+        if (session.inTransaction()) {
+            await session.abortTransaction();
+        }
+        next(err);
+    }
+    finally {
+        if(session) {
+            session.endSession();
+        }
+    }
+}));
+*/
 
 app.get("/testlisting", async (req, res) => {
     let newListing = new Listing({
