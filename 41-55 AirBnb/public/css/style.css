@@ -62,13 +62,13 @@ body {
 } */
 
 /* Cards */
-.card {
+.listing-card {
     border-radius: 1rem;
     margin-bottom: 2rem;
     transition: 0.2s;
 }
 
-.card img {
+.listing-card img {
     border-radius: 1rem;
     width: 100%;
     object-fit:cover;
@@ -90,12 +90,12 @@ body {
     justify-content: flex-end;
 }
 
-.card:hover .card-img-overlay{
+.listing-card:hover .card-img-overlay{
     opacity: 1;
     text-shadow: 0px 0px 10px white;
 }
 
-.card:hover {
+.listing-card:hover {
     box-shadow: 0px 0px 10px black;
 }
 

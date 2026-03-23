@@ -8,7 +8,18 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema } = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
+
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+main().then(() => {
+    console.log("Connected to db")
+})
+.catch((err) => {
+    console.log(err);
+});
+async function main() {
+    return await mongoose.connect(MONGO_URL);
+}
 
 app.engine("ejs", ejsMate);
 
@@ -33,15 +44,15 @@ const validateListing = (req, res, next) => {//we can use this middleware in upd
     }
 };
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-main().then(() => {
-    console.log("Connected to db")
-})
-.catch((err) => {
-    console.log(err);
-});
-async function main() {
-    return await mongoose.connect(MONGO_URL);
+const validateReview = (req, res, next) => {
+    let validationResult = reviewSchema.validate(req.body);
+    if(validationResult.error) {
+        let errMsg = validationResult.error.details.map((el) => (el.message)).join(", ");
+        throw new ExpressError(400, errMsg);
+    }
+    else {
+        next();
+    }
 }
 
 app.get("/", (req, res) => {
@@ -133,12 +144,13 @@ app.delete("/listings/:id", async (req, res, next) => {
 app.get("/listings/:id", wrapAsync(async (req, res) => {
     let {id} = req.params;
     let listing = await Listing.findById(id);
+    await listing.populate("reviews");
     res.render("listings/show.ejs", { listing });
 }));
 
 //Reviews
 //POST Route
-app.post("/listings/:id/reviews", wrapAsync(async (req, res, next) => {
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     if(!listing) {
@@ -148,7 +160,7 @@ app.post("/listings/:id/reviews", wrapAsync(async (req, res, next) => {
     await newReview.save();
     listing.reviews.push(newReview._id);
     let resListing = await listing.save();
-    await resListing.populate("reviews")
+    await resListing.populate("reviews");
     // res.send(resListing);
     res.redirect(`/listings/${id}`);
 }));
@@ -185,6 +197,18 @@ app.post("/listings/:id/reviews", wrapAsync(async (req, res, next) => {
     }
 }));
 */
+
+//Delete Route for review
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res, next) => {
+    let {id , reviewId} = req.params;
+    // let listing = await Listing.findById(id);
+    // let updatedReviews = listing.reviews.filter((el) => (el.toString() !== reviewId.toString()));
+    // listing.reviews = updatedReviews;
+    // await listing.save();
+    await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+}));
 
 app.get("/testlisting", async (req, res) => {
     let newListing = new Listing({
