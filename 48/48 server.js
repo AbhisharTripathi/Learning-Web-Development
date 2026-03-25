@@ -1,7 +1,7 @@
 //Express router are way to organize your Express application so that your primary app.js does not become bloated.
 const express = require("express");
 const app = express();
-const cookieParser = require("cookie-parser");//it is a npm package
+const cookieParser = require("cookie-parser");//it is a npm package used to read cookies on server side.
 const users = require("./routes/user.js");
 const posts = require("./routes/post.js");
 
