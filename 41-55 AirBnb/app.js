@@ -10,9 +10,13 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const PassportLocal = require("passport-local");
+const User = require("./model/user.js");
 
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 main().then(() => {
@@ -46,11 +50,31 @@ const sessionOptions = {
     }
 };
 app.use(session(sessionOptions));
-app.use(flash());
+app.use(flash());//To use flash we need session.
+
+//to use passport we nedd session.
+app.use(passport.initialize());//This will initialize the passport for every request.
+app.use(passport.session());//this middleware will check if the request is passed by the same user. A web application needs the ability to identify the user as they browse from page to page. This series of requests and responses, each associated with the same user is known as session.
+passport.use(new PassportLocal(User.authenticate()));//use static authenticate method of model in PassportLocal
+
+passport.serializeUser(User.serializeUser()); //it serialize User into the session.
+passport.deserializeUser(User.deserializeUser()); //it deserialize user into the session.
+
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash("success");
     res.locals.errorMsg = req.flash("error");
     next();
+});
+
+app.get("/demouser", async (req, res) => {
+    let demoUser = new User({
+        email: "student@gmail.com",
+        username: "studentusername"
+    });
+
+    let registeredUser = await User.register(demoUser, "passwordofstudent");//this is static method of model, it checks if the username is unique and save the user in the database with the given password. We can also pass a third argument which should be a callback. it also hash the password using pbkdf2 after salting it.
+    console.log(registeredUser);
+    res.send(registeredUser);
 });
 
 app.get("/", (req, res) => {
@@ -58,10 +82,13 @@ app.get("/", (req, res) => {
 });
 
 //Listings routes
-app.use("/listings", listings);
+app.use("/listings", listingRouter);
 
-//Review routes
-app.use("/listings/:id/reviews", reviews);
+//Reviews routes
+app.use("/listings/:id/reviews", reviewRouter);
+
+//Users routes
+app.use("/users", userRouter);
 
 //Page not found
 app.use((req, res, next) => {

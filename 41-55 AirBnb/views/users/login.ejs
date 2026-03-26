@@ -1,0 +1,23 @@
+<%- layout("/layouts/boilerplate") %> <!--All ejs template will look in views folder.-->
+<body>
+    <div  class="row mt-4">
+        <h1 class="col-lg-7 offset-lg-2">Login on WanderLust</h1>
+        <div class="col-lg-7 offset-lg-2">
+            <form action="/users/login" method="POST" novalidate class="needs-validation">
+                <div class="mt-3">
+                    <label for="username" class="form-label">Username : </label>
+                    <input id="username" class="form-control" type="text" name="username" placeholder="Enter username" required>
+                    <div class="invalid-feedback">Please enter a username.</div>
+                </div>
+                <div class="mt-3">
+                    <label for="password" class="form-label">Password : </label>
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Enter password" required>
+                    <div class="invalid-feedback">Please enter password.</div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-outline-danger">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
