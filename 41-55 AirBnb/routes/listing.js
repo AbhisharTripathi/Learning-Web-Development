@@ -4,17 +4,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../model/listing.js");
-
-const validateListing = (req, res, next) => {//we can use this middleware in update and create route but we only used this in update route because we used another form of joi validation for create route but this is better than that.
-    let { error: validationError } = listingSchema.validate(req.body);
-    if(validationError) {
-        let errMsg = validationError.details.map((el) => (el.message)).join(", ");//details is an array of objects, and each object contains a message property.
-        throw new ExpressError(400, errMsg);
-    } 
-    else {
-        next();
-    }
-};
+const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
+const Review = require("../model/review.js");
 
 //Index Route
 router.get("/", async (req, res) => {
@@ -28,12 +19,13 @@ router.get("/", async (req, res) => {
 });
 
 //New route
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
+    // console.log(req.user);//it is the object document containing the info(_id, email, useranme, __v are there but password is not present) of authenticated user.
     res.render("./listings/new.ejs");
 });
 
 //Create route
-router.post("/", wrapAsync(async (req, res) => {
+router.post("/", isLoggedIn, wrapAsync(async (req, res) => {
     let validationResult = listingSchema.validate(req.body);//this is used to validate the req.body with the listingSchema that we defined using Joi. it will not automatically throw the error.
     // console.log(validationResult);//this is the result it produces.
     if(validationResult.error) { //if error exists in the validation result
@@ -56,7 +48,7 @@ router.post("/", wrapAsync(async (req, res) => {
 
     // let listing = new Listing(req.body); these two will work only if you use form normally.
 
-    let newListing = new Listing(req.body.listing);
+    let newListing = new Listing({...req.body.listing, owner: req.user._id});
 
     await newListing.save();
     req.flash("success", "Listing Added!");
@@ -64,7 +56,7 @@ router.post("/", wrapAsync(async (req, res) => {
 }));
 
 //Edit route
-router.get("/:id/edit",wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
         let listing = await Listing.findById(id);
         if(!listing) {
@@ -77,7 +69,7 @@ router.get("/:id/edit",wrapAsync(async (req, res) => {
 }));
 
 //Update Route
-router.put("/:id", validateListing, async (req, res, next) => {//here the validateListing middleware is used.
+router.put("/:id", isLoggedIn, isOwner, validateListing, async (req, res, next) => {//here the validateListing middleware is used.
     let { id } = req.params;
     // if(!req.body.listing) { //we don't need this now as we are using joi.
     //     throw new ExpressError(400, "Send valid data for Listing.");
@@ -93,7 +85,7 @@ router.put("/:id", validateListing, async (req, res, next) => {//here the valida
 });
 
 //Delete Route
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isLoggedIn, isOwner, async (req, res, next) => {
     let { id } = req.params;
     try {
         let deletedListing = await Listing.findByIdAndDelete(id);
@@ -114,7 +106,8 @@ router.get("/:id", wrapAsync(async (req, res) => {
         res.redirect("/listings");
     }
     else{
-        await listing.populate("reviews");
+        await listing.populate({path: "reviews", populate: {path: "author"}});
+        await listing.populate("owner");
         res.render("listings/show.ejs", { listing });
     }
 }));

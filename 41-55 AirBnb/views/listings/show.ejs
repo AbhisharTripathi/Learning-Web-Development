@@ -6,21 +6,25 @@
                 <img src="<%= listing.image %>" alt="listing image" class="show-img col-12 col-md-5">
         </div>
         <div class="details mb-3">
+            <span class="details-heading">Owner: </span><i><%= listing.owner.username %></i><br>
             <span class="details-heading">Description: </span><%= listing.description %><br>
             <span class="details-heading">Location: </span><%= listing.location %><br>
             <span class="details-heading">Country: </span><%= listing.country %><br>
             <span class="details-heading">Price: </span>&#8377; <%= listing.price.toLocaleString("en-IN") %></p><!--To convert number into local comma separated string-->
         </div>
-        <div class="show-btns mb-3 col-md-8">
-            <div>
-                <a href="/listings/<%= listing._id %>/edit"><button class="btn show-btn col-2">Edit</button></a>
+        <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+            <div class="show-btns mb-3 col-md-8">
+                <div>
+                    <a href="/listings/<%= listing._id %>/edit"><button class="btn show-btn col-2">Edit</button></a>
+                </div>
+                <div>
+                    <form method="POST" action="/listings/<%= listing._id %>?_method=delete"><button class="btn show-btn col-2">Delete</button></form><!--delete in lowercase will also work for _method=-->
+                </div>
             </div>
-            <div>
-                <form method="POST" action="/listings/<%= listing._id %>?_method=delete"><button class="btn show-btn col-2">Delete</button></form><!--delete in lowercase will also work for _method=-->
-            </div>
-        </div>
+        <% } %>
     </div>
 
+    <% if(currUser) { %>
     <hr>
     <div class="mt-4 mb-4 col-md-8">
         <h4>Leave a Review</h4>
@@ -40,13 +44,14 @@
         </form>
     </div>
 
+    <% } %>
     <hr>
     <div class="mb-3 row">
         <h5>All Reviews</h5>
         <% for(let review of listing.reviews) { %>
                 <div class="card mt-3 me-5 col-md-5">
                     <div class="card-body">
-                        <div class="card-title">Jon doe</div>
+                        <div class="card-title"><i>@<%= review.author.username %></i></div>
                         <!-- <div class="card-text"><%- "&#11088; ".repeat(review.rating) %></div> -->
                         <div class="card-text"><%- "&#9733;".repeat(review.rating) + "&#9734;".repeat(5 - review.rating)  %></div>
                         <div class="card-text"><%= review.comment %></div>
