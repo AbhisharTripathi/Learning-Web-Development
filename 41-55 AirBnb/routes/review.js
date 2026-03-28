@@ -2,31 +2,20 @@ const express = require("express");
 const router = express.Router({mergeParams: true});//This helps in merging or sending the params from the parent path to the child path.
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
-const { reviewSchema } = require("../schema.js");
 const Listing = require("../model/listing.js");
 const Review = require("../model/review.js");
-
-const validateReview = (req, res, next) => {
-    let validationResult = reviewSchema.validate(req.body);
-    if(validationResult.error) {
-        let errMsg = validationResult.error.details.map((el) => (el.message)).join(", ");
-        throw new ExpressError(400, errMsg);
-    }
-    else {
-        next();
-    }
-}
+const { validateReview, isLoggedIn, isReviewAuthor } = require("../middlewares.js");
 
 //Reviews
 //POST Route
-router.post("/", validateReview, wrapAsync(async (req, res, next) => {
+router.post("/",isLoggedIn, validateReview, wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     // console.log(id);//if we not use mergeParams the value of id will be undefined.
     let listing = await Listing.findById(id);
     if(!listing) {
         throw new ExpressError(404, "Listing not found.");
     }
-    let newReview = new Review(req.body.review);
+    let newReview = new Review({ ...req.body.review, author: req.user._id});
     await newReview.save();
     listing.reviews.push(newReview._id);
     let resListing = await listing.save();
@@ -70,7 +59,7 @@ router.post("/", wrapAsync(async (req, res, next) => {
 */
 
 //Delete Route for review
-router.delete("/:reviewId", wrapAsync(async (req, res, next) => {
+router.delete("/:reviewId",isLoggedIn, isReviewAuthor, wrapAsync(async (req, res, next) => {
     let {id , reviewId} = req.params;
     // let listing = await Listing.findById(id);
     // let updatedReviews = listing.reviews.filter((el) => (el.toString() !== reviewId.toString()));
