@@ -4,25 +4,20 @@ const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
 const Review = require("../model/review.js");
 const listingController = require("../controllers/listing.js");
 
-//Index Route
-router.get("/", listingController.index);
-
 //New route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-//Create route
-router.post("/", isLoggedIn, listingController.createNewListing);
+//roter.route("path").get().post().delete();  can group different request with same path.
+router.route("/")
+.get(listingController.index)//Index Route
+.post(isLoggedIn, listingController.createNewListing);//Create route
+
+router.route("/:id")
+    .get(listingController.showListing)//show route
+    .put(isLoggedIn, isOwner, validateListing, listingController.updateListing)//Update Route, here the validateListing middleware is used.
+    .delete(isLoggedIn, isOwner, listingController.deleteListing);//Delete Route
 
 //Edit route
 router.get("/:id/edit", isLoggedIn, isOwner, listingController.renderEditForm);
-
-//Update Route
-router.put("/:id", isLoggedIn, isOwner, validateListing, listingController.updateListing);//here the validateListing middleware is used.
-
-//Delete Route
-router.delete("/:id", isLoggedIn, isOwner, listingController.deleteListing);
-
-//Show Route
-router.get("/:id", listingController.showListing);
 
 module.exports = router;
