@@ -1,45 +1,250 @@
 const sampleListings = [
-  { title: "Beachfront Villa", description: "Beautiful villa facing the ocean.", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", price: 6500, location: "Goa", country: "India" },
-  { title: "Mountain Cabin", description: "Peaceful wooden cabin in the mountains.", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e", price: 3500, location: "Manali", country: "India" },
-  { title: "Luxury Apartment", description: "Modern apartment in downtown.", image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb", price: 7200, location: "Mumbai", country: "India" },
-  { title: "Royal Haveli Stay", description: "Experience royal Rajasthani culture.", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e", price: 5400, location: "Jaipur", country: "India" },
-  { title: "Lake View Cottage", description: "Quiet cottage beside lake.", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688", price: 3800, location: "Nainital", country: "India" },
-  { title: "Desert Camp", description: "Traditional camping in desert dunes.", image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470", price: 2900, location: "Jaisalmer", country: "India" },
-  { title: "Forest Treehouse", description: "Unique treehouse in forest.", image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e", price: 4200, location: "Wayanad", country: "India" },
-  { title: "Snow Chalet", description: "Wooden chalet with snow views.", image: "https://images.unsplash.com/photo-1484154218962-a197022b5858", price: 5600, location: "Gulmarg", country: "India" },
-  { title: "Hill Resort", description: "Beautiful hilltop resort.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750", price: 4100, location: "Shimla", country: "India" },
-  { title: "Backwater Villa", description: "Luxury stay near Kerala backwaters.", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511", price: 4700, location: "Alleppey", country: "India" },
+  {
+    title: 'Cozy Mountain Cabin',
+    description: 'A peaceful retreat in the mountains with scenic views.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85',
+      filename: 'unsplash/photo1'
+    },
+    price: 120,
+    location: 'Manali',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Beachside Villa',
+    description: 'Enjoy ocean views and private beach access.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+      filename: 'unsplash/photo2'
+    },
+    price: 250,
+    location: 'Goa',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Modern Apartment',
+    description: 'Stay in the heart of the city with all amenities.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb',
+      filename: 'unsplash/photo3'
+    },
+    price: 90,
+    location: 'Mumbai',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Luxury Desert Camp',
+    description: 'Experience desert life with modern comfort.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e',
+      filename: 'unsplash/photo4'
+    },
+    price: 180,
+    location: 'Jaisalmer',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Lakeview Cottage',
+    description: 'Relax by the lake with stunning sunrise views.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
+      filename: 'unsplash/photo5'
+    },
+    price: 110,
+    location: 'Nainital',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Rustic Farmhouse',
+    description: 'A charming farmhouse surrounded by greenery.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1464146072230-91cabc968266',
+      filename: 'unsplash/photo6'
+    },
+    price: 95,
+    location: 'Punjab',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Treehouse Stay',
+    description: 'Live among trees in this unique treehouse.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae',
+      filename: 'unsplash/photo7'
+    },
+    price: 140,
+    location: 'Kerala',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Hilltop Bungalow',
+    description: 'A quiet bungalow with breathtaking hill views.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1449844908441-8829872d2607',
+      filename: 'unsplash/photo8'
+    },
+    price: 130,
+    location: 'Shimla',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Heritage Haveli',
+    description: 'Stay in a historic haveli with royal interiors.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b',
+      filename: 'unsplash/photo9'
+    },
+    price: 200,
+    location: 'Jaipur',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Forest Cabin',
+    description: 'A secluded cabin in the forest.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+      filename: 'unsplash/photo10'
+    },
+    price: 115,
+    location: 'Coorg',
+    country: 'India',
+    reviews: [],
+  },
 
-  { title: "Tea Garden Bungalow", description: "Stay in tea plantation.", image: "https://images.unsplash.com/photo-1494526585095-c41746248156", price: 3900, location: "Darjeeling", country: "India" },
-  { title: "River View Lodge", description: "Peaceful lodge near river.", image: "https://images.unsplash.com/photo-1501183638710-841dd1904471", price: 3100, location: "Rishikesh", country: "India" },
-  { title: "Temple City Stay", description: "Comfortable stay near temples.", image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6", price: 2500, location: "Varanasi", country: "India" },
-  { title: "Coffee Estate Stay", description: "Relax in coffee farms.", image: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae", price: 3600, location: "Coorg", country: "India" },
-  { title: "Wildlife Lodge", description: "Stay near wildlife sanctuary.", image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e", price: 5100, location: "Jim Corbett", country: "India" },
-  { title: "Business Hotel", description: "Perfect for business travelers.", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2", price: 6200, location: "Bangalore", country: "India" },
-  { title: "Lake Palace Stay", description: "Romantic palace beside lake.", image: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9", price: 8800, location: "Udaipur", country: "India" },
-  { title: "Cliffside Resort", description: "Amazing cliff view rooms.", image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee", price: 5300, location: "Varkala", country: "India" },
+  // 20 more entries
 
-  { title: "City Apartment", description: "Stylish apartment downtown.", image: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353", price: 7200, location: "New York", country: "USA" },
-  { title: "Beach Condo", description: "Modern condo near beach.", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", price: 7500, location: "Miami", country: "USA" },
-  { title: "Hollywood Hills Villa", description: "Luxury villa in hills.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750", price: 12000, location: "Los Angeles", country: "USA" },
-  { title: "Downtown Loft", description: "Industrial style loft.", image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb", price: 6800, location: "Chicago", country: "USA" },
+  {
+    title: 'Urban Studio',
+    description: 'Compact and modern studio apartment.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858',
+      filename: 'unsplash/photo11'
+    },
+    price: 80,
+    location: 'Delhi',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Luxury Penthouse',
+    description: 'Top-floor penthouse with skyline views.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688',
+      filename: 'unsplash/photo12'
+    },
+    price: 300,
+    location: 'Bangalore',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Beach Hut',
+    description: 'Simple hut right on the beach.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+      filename: 'unsplash/photo13'
+    },
+    price: 70,
+    location: 'Goa',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Snow Cabin',
+    description: 'Enjoy snowfall from a warm cabin.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66',
+      filename: 'unsplash/photo14'
+    },
+    price: 150,
+    location: 'Manali',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Jungle Lodge',
+    description: 'Adventure stay in the jungle.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1470115636492-6d2b56f9146d',
+      filename: 'unsplash/photo15'
+    },
+    price: 160,
+    location: 'Assam',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Cliffside Villa',
+    description: 'Villa perched on a cliff with ocean views.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+      filename: 'unsplash/photo16'
+    },
+    price: 270,
+    location: 'Goa',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Eco Stay',
+    description: 'Sustainable living with nature.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e',
+      filename: 'unsplash/photo17'
+    },
+    price: 100,
+    location: 'Rishikesh',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Island Resort',
+    description: 'Private island luxury experience.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21',
+      filename: 'unsplash/photo18'
+    },
+    price: 400,
+    location: 'Andaman',
+    country: 'India',
+    reviews: [],
+  },
+  {
+    title: 'Countryside Villa',
+    description: 'Relax in peaceful countryside.',
+    image: {
+      url: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae',
+      filename: 'unsplash/photo20'
+    },
+    price: 140,
+    location: 'Udaipur',
+    country: 'India',
+    reviews: [],
+  },
 
-  { title: "Paris Studio", description: "Charming studio apartment.", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688", price: 9000, location: "Paris", country: "France" },
-  { title: "London Flat", description: "Elegant flat in central London.", image: "https://images.unsplash.com/photo-1501183638710-841dd1904471", price: 9500, location: "London", country: "UK" },
-  { title: "Canal View Apartment", description: "Beautiful canal view.", image: "https://images.unsplash.com/photo-1494526585095-c41746248156", price: 8700, location: "Amsterdam", country: "Netherlands" },
-  { title: "Colosseum Stay", description: "Stay near historic landmarks.", image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6", price: 8800, location: "Rome", country: "Italy" },
-  { title: "Santorini Villa", description: "White villa with sea view.", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511", price: 11000, location: "Santorini", country: "Greece" },
+  // last 10
 
-  { title: "Tokyo Capsule Stay", description: "Modern compact stay.", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2", price: 5000, location: "Tokyo", country: "Japan" },
-  { title: "Kyoto Traditional House", description: "Authentic Japanese home.", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e", price: 7200, location: "Kyoto", country: "Japan" },
-  { title: "Seoul City Apartment", description: "Trendy city apartment.", image: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae", price: 6400, location: "Seoul", country: "South Korea" },
-  { title: "Bali Jungle Villa", description: "Private villa in jungle.", image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e", price: 7800, location: "Bali", country: "Indonesia" },
-
-  { title: "Sydney Harbour Apartment", description: "Apartment with harbour view.", image: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9", price: 9200, location: "Sydney", country: "Australia" },
-  { title: "Melbourne Studio", description: "Modern city studio.", image: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353", price: 7000, location: "Melbourne", country: "Australia" },
-  { title: "Cape Town Beach House", description: "House near beach.", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", price: 6500, location: "Cape Town", country: "South Africa" },
-  { title: "Dubai Luxury Suite", description: "High-end luxury suite.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750", price: 13000, location: "Dubai", country: "UAE" },
-  { title: "Istanbul Heritage Hotel", description: "Historic hotel stay.", image: "https://images.unsplash.com/photo-1501183638710-841dd1904471", price: 7600, location: "Istanbul", country: "Turkey" }
+  // ...Array.from({ length: 10 }, (_, i) => ({
+  //   title: `Sample Stay ${i + 21}`,
+  //   description: 'Comfortable stay with great amenities.',
+  //   image: {
+  //     url: `https://images.unsplash.com/photo-1505693${i}6388-ac5ce068fe85`,
+  //     filename: `unsplash/photo${i + 21}`
+  //   },
+  //   price: 100 + i * 10,
+  //   location: 'Hyderabad',
+  //   country: 'India',
+  //   reviews: [],
+  // }))
 ];
 
 module.exports = { data: sampleListings };

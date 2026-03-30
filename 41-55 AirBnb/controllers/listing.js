@@ -2,6 +2,7 @@ const Listing = require("../model/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
+const { cloudinary } = require("../cloudConfig.js");
 
 module.exports.index = async (req, res) => {
     try {
@@ -19,6 +20,7 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createNewListing = wrapAsync(async (req, res) => {
+    let { path: url, filename} = req.file;
     let validationResult = listingSchema.validate(req.body);//this is used to validate the req.body with the listingSchema that we defined using Joi. it will not automatically throw the error. better practice to use it is using a middleware.
     // console.log(validationResult);//this is the result it produces.
     if(validationResult.error) { //if error exists in the validation result
@@ -42,7 +44,7 @@ module.exports.createNewListing = wrapAsync(async (req, res) => {
     // let listing = new Listing(req.body); these two will work only if you use form normally.
 
     let newListing = new Listing({...req.body.listing, owner: req.user._id});
-
+    newListing.image = { url, filename};
     await newListing.save();
     req.flash("success", "Listing Added!");
     res.redirect("/listings");
@@ -66,13 +68,24 @@ module.exports.updateListing = async (req, res, next) => {
     //     throw new ExpressError(400, "Send valid data for Listing.");
     // }//we can write this condition check for every listing info to check for their presence and throw different error for each of them.
     try {
-        await Listing.findByIdAndUpdate(id, {...req.body.listing});
+        let updateData = {...req.body.listing};
+        if(req.file) {
+            // delete old image from cloud
+            const listing = await Listing.findById(id);
+            if(listing.image && listing.image.filename) {
+                await cloudinary.uploader.destroy(listing.image.filename);
+            }
+            updateData["image.url"] = req.file.path;
+            updateData["image.filename"] = req.file.filename;
+            // await Listing.findByIdAndUpdate(id, {$set: {"image.url": url, "image.filename": filename}});
+        }
+        await Listing.findByIdAndUpdate(id, {$set: updateData}, { runValidators: true});
+        req.flash("success", "Listing Updated!");
+        res.redirect(`/listings/${id}`);
     }
     catch(err) {
         next(err);
     }
-    req.flash("success", "Listing Updated!");
-    res.redirect(`/listings/${id}`);
 };
 
 module.exports.deleteListing = async (req, res, next) => {

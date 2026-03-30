@@ -4,35 +4,38 @@
     <div class="row mt-4">
         <h3 class="mb-4">Edit this Listing</h3>
         <div class="text-center text-md-start ">
-            <img src="<%= listing.image %>" alt="listing image" class="edit-img mb-3 col-12 col-md-5">
+            <img src="<%= listing.image.url %>" alt="listing image" class="edit-img mb-3 col-12 col-md-5">
         </div>
         <div class="col-md-8">
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title : </label>
-                    <input id="title" name="listing[title]" type="text" value="<%= listing.title %>" class="form-control">
+                    <input id="title" name="listing[title]" type="text" value="<%= listing.title %>" class="form-control" required>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="country" class="form-label">Country : </label>
-                        <input id="country" name="listing[country]" type="text" value="<%= listing.country %>" class="form-control">
+                        <input id="country" name="listing[country]" type="text" value="<%= listing.country %>" class="form-control" required>
                     </div>
                     <div class="col-md-8">
                         <label for="location" class="form-label">Location : </label>
-                        <input id="location" name="listing[location]" type="text" value="<%= listing.location %>" class="form-control">
+                        <input id="location" name="listing[location]" type="text" value="<%= listing.location %>" class="form-control" required>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price : </label>
-                    <input id="price" name="listing[price]" type="number" value="<%= listing.price %>" class="form-control">
+                    <input id="price" name="listing[price]" type="number" value="<%= listing.price %>" class="form-control" required>
+                </div>
+                <div class="mb-2">
+                    <img src="<%= listing.image.url.replace("/upload", "/upload/w_250,h_300") + '?w=250&q=75&auto=format' %>" alt="listing-image">
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image : </label>
-                    <input id="image" name="listing[image]" type="text" value="<%= listing.image %>" class="form-control">
+                    <label for="image" class="form-label">Image <sup>(optional)</sup> : </label>
+                    <input id="image" name="listing[image]" type="file" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description :-</label>
-                    <textarea id="description" name="listing[description]" rows="4" class="form-control"><%= listing.description %></textarea>
+                    <textarea id="description" name="listing[description]" rows="4" class="form-control" required><%= listing.description %></textarea>
                 </div>
                 
                 <div class="mb-3">

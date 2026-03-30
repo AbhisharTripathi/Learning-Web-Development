@@ -11,10 +11,21 @@ const listingSchema = Schema({
     description: {
         type: String
     },
+    // image: {
+    //     type: String,
+    //     default: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
+    //     set: (v) => v==="" ? "https://images.unsplash.com/photo-1470770841072-f978cf4d019e" : v
+    // },
     image: {
-        type: String,
-        default: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
-        set: (v) => v==="" ? "https://images.unsplash.com/photo-1470770841072-f978cf4d019e" : v
+        url: {
+            type: String,
+            default: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
+            set: (v) => v==="" ? "https://images.unsplash.com/photo-1470770841072-f978cf4d019e" : v
+        },
+        filename: {
+            type: String,
+            default: "default_filename"
+        }
     },
     price: {
         type: Number
@@ -34,7 +45,22 @@ const listingSchema = Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    // geometry: {
+    //     type: {
+    //         type: String,
+    //         enum: ["point"],
+    //         required: true
+    //     },
+    //     coordinates: {
+    //         type: [Number],
+    //         required: true
+    //     }
+    // },
+    // category: {
+    //     type: [String],
+    //     enum: ["Trending", "Rooms", "Iconic cities", "Mountains", "Amazing pool", "Castles", "Camping", "Farms", "Arctic"]
+    // }
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

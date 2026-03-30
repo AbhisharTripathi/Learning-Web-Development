@@ -1,14 +1,17 @@
+if(process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
+// console.log(process.env);
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./model/listing.js");
-const Review = require("./model/review.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;//it is a session store. It requires express-session.
 const flash = require("connect-flash");
 const passport = require("passport");
 const PassportLocal = require("passport-local");
@@ -18,7 +21,10 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dns = require("dns");
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
+const dbUrl = process.env.ATLASDB_URL;
 main().then(() => {
     console.log("Connected to db")
 })
@@ -26,7 +32,7 @@ main().then(() => {
     console.log(err);
 });
 async function main() {
-    return await mongoose.connect(MONGO_URL);
+    return await mongoose.connect(dbUrl);
 }
 
 app.engine("ejs", ejsMate);
@@ -39,8 +45,22 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 // This tells Express to serve everything inside the "bootstrap-5.3.8-dist" folder
 app.use('/bootstrap', express.static(path.join(__dirname, 'bootstrap-5.3.8-dist')));
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET 
+    },
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", (err) => {
+    console.log("Error on MONGO SESSION STORE.", err);
+});
+
 const sessionOptions = {
-    secret: "SuperSecret",
+    store: store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -49,6 +69,7 @@ const sessionOptions = {
         httpOnly: true
     }
 };
+
 app.use(session(sessionOptions));
 app.use(flash());//To use flash we need session.
 
@@ -67,6 +88,7 @@ app.use((req, res, next) => {
     next();
 });
 
+/*
 app.get("/demouser", async (req, res) => {
     let demoUser = new User({
         email: "student@gmail.com",
@@ -77,10 +99,7 @@ app.get("/demouser", async (req, res) => {
     console.log(registeredUser);
     res.send(registeredUser);
 });
-
-app.get("/", (req, res) => {
-    res.send(`<a href="/listings">Go to All listings.</a>`);
-});
+*/
 
 //Listings routes
 app.use("/listings", listingRouter);

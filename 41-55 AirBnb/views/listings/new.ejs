@@ -3,7 +3,7 @@
     <div class="row mt-4">
         <h3>Enter Detail for your new listing</h3>
         <div class="col-md-8">
-            <form method="POST" action="/listings" novalidate class="needs-validation">
+            <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data"><!--multipart/form-data allows us to send files through form.-->
                 <div class="mb-3">
                     <label for="title" class="form-label">Title : </label>
                     <input id="title" name="listing[title]" type="text" placeholder="Enter the Title" class="form-control" required>
@@ -24,9 +24,13 @@
                     <label for="price" class="form-label">Price : </label>
                     <input id="price" name="listing[price]" type="number" placeholder="Enter the Price" class="form-control" required>
                 </div>
+                <!-- <div class="mb-3">
+                    <label for="image-url" class="form-label">Image : </label>
+                    <input id="image-url" name="listing[image-url]" type="text" placeholder="Enter image URL" class="form-control">
+                </div> -->
                 <div class="mb-3">
                     <label for="image" class="form-label">Image : </label>
-                    <input id="image" name="listing[image]" type="text" placeholder="Enter image URL" class="form-control">
+                    <input id="image" name="listing[image]" type="file" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description :-</label>
