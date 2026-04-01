@@ -101,6 +101,10 @@ app.get("/demouser", async (req, res) => {
 });
 */
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 //Listings routes
 app.use("/listings", listingRouter);
 
