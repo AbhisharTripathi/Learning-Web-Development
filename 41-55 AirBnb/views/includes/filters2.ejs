@@ -1,0 +1,163 @@
+<style>
+    .filters {
+        display: flex;
+        /* width: 100%; */
+        /* flex-wrap: nowrap; */
+        overflow-x: auto;
+        /* white-space: nowrap; */
+        gap: 3rem;
+        scrollbar-width: none; /*firefox*/
+        -ms-overflow-style: none; /*IE and edge*/
+    }
+
+    .filters::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .filter {
+        /* border: 1px solid black;
+        border-radius: 1rem; */
+        opacity: 0.8;
+        /* margin-left: 1rem; */
+        text-align: center;
+    }
+
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+    }
+
+    .hidden-tax {
+        display: none;
+    }
+
+    .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3rem;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn.scroll-left, .btn.scroll-right {
+        border: 1px solid black;
+        font-size: 0.8rem;
+        width: 2rem;
+        height: 2rem;
+        text-align: center;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .btn.scroll-left:hover, .btn.scroll-right:hover {
+        box-shadow: 0 0 5px black;
+        background-color: rgb(243, 243, 243);
+    }
+     
+    .arrow-left, .arrow-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .filter p {
+        text-wrap: nowrap;
+    }
+
+    @media (max-width: 768px) {
+        .btn.scroll-left, .btn.scroll-right {
+            display: none;
+        }
+    }
+
+</style>
+
+<div class="row g-0">
+    <div class="col-lg-9 col-md-12">
+        <div class="row g-0">
+            <div class="arrow-left col-md-1">
+                <div class="btn scroll-left " onclick="scrollFilters(-1)">&#10094;</div>
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="filters mt-4 me-md-5">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <p>Trending</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <p>Rooms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <p>Iconic cities</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain"></i></div>
+                        <p>Mountains</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-person-swimming"></i></div>
+                        <p>Amazing pool</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-brands fa-fort-awesome"></i></div>
+                        <p>Castles</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-regular fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-regular fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow-right col-md-1">
+                <div class="btn scroll-right" onclick="scrollFilters(1)">&#10095;</div>
+            </div>
+        </div>
+    </div>
+    <div class="tax-toggle col-lg-3">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after Taxes</label>
+        </div>
+    </div>
+</div>
+
+<script>
+    function scrollFilters(direction) {
+        const container = document.getElementsByClassName("filters")[0];
+        const scrollAmount = 200;
+
+        container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth"
+        });
+    }
+
+
+</script>

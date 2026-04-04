@@ -1,0 +1,106 @@
+<style>
+    .scrollable-filter .filters-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: #fff;
+        padding: 0.5rem 2rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .scrollable-filter .filters-container {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        white-space: nowrap;
+        scrollbar-width: none; /*Firefox*/
+    }
+
+    .scrollable-filter .filters-container::-webkit-scrollbar {
+        display: none; /* Chrome */
+    }
+
+    .scrollable-filter .filter {
+        flex: 0 0 auto;
+        font-size: 0.9rem;
+        color: #555;
+        cursor: pointer;
+        padding-bottom: 0.3rem;
+        border-bottom: 2px solid transparent;
+    }
+
+    .scrollable-filter .filter:hover {
+        color: black;
+        border-bottom: 2px solid black;
+    }
+
+    /* Arrow buttons styling */
+.scrollable-filter .scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0.4rem 0.6rem;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+}
+
+.scrollable-filter .scroll-btn.left {
+  left: 5px;
+}
+
+.scrollable-filter .scroll-btn.right {
+  right: 5px;
+}
+
+@media (max-width: 768px) {
+  .scrollable-filter .scroll-btn {
+    display: none;
+  }
+}
+</style>
+
+<div class="filters-wrapper">
+  <button class="scroll-btn left" onclick="scrollFilters(-1)">&#10094;</button>
+
+  <div class="filters-container" id="filters">
+    <div class="filter">Amazing views</div>
+    <div class="filter">Beachfront</div>
+    <div class="filter">Cabins</div>
+    <div class="filter">Trending</div>
+    <div class="filter">Tiny homes</div>
+    <div class="filter">Farms</div>
+    <div class="filter">Castles</div>
+    <div class="filter">Camping</div>
+    <div class="filter">Arctic</div>
+    <div class="filter">Desert</div>
+    <div class="filter">Amazing views</div>
+    <div class="filter">Beachfront</div>
+    <div class="filter">Cabins</div>
+    <div class="filter">Trending</div>
+    <div class="filter">Tiny homes</div>
+    <div class="filter">Farms</div>
+    <div class="filter">Castles</div>
+    <div class="filter">Camping</div>
+    <div class="filter">Arctic</div>
+    <div class="filter">Desert</div>
+  </div>
+
+  <button class="scroll-btn right" onclick="scrollFilters(1)">&#10095;</button>
+</div>
+<script>
+  function scrollFilters(direction) {
+    const container = document.getElementById("filters");
+    const scrollAmount = 200;
+
+    container.scrollBy({
+      left: direction * scrollAmount,
+      behavior: "smooth"
+    });
+  }
+</script>
