@@ -1,106 +1,213 @@
 <style>
-    .scrollable-filter .filters-wrapper {
-        position: relative;
+    .filters {
+        display: flex;
+        /* width: 100%; */
+        /* flex-wrap: nowrap; */
+        overflow-x: auto;
+        /* white-space: nowrap; */
+        gap: 3rem;
+        scrollbar-width: none; /*firefox*/
+        -ms-overflow-style: none; /*IE and edge*/
+    }
+
+    .filters::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    /* both sides fade */
+    .filters.fade-both {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 110px, black calc(100% - 110px), transparent);
+        mask-image: linear-gradient(to right, transparent, black 110px, black calc(100% - 110px), transparent);
+    }
+
+    /* only right fade */
+    .filters.fade-right {
+        -webkit-mask-image: linear-gradient(to right, black calc(100% - 110px), transparent);
+        mask-image: linear-gradient(to right, black calc(100% - 110px), transparent);
+    }
+
+    /* only left fade */
+    .filters.fade-left {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 110px);
+        mask-image: linear-gradient(to right, transparent, black 110px);
+    }
+
+    .filter {
+        opacity: 0.8;
+        text-align: center;
+    }
+
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+    }
+
+    .hidden-tax {
+        display: none;
+    }
+
+    .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3rem;
+        align-self: center;
         display: flex;
         align-items: center;
-        background: #fff;
-        padding: 0.5rem 2rem;
-        border-bottom: 1px solid #eee;
+        justify-content: center;
     }
 
-    .scrollable-filter .filters-container {
+    .btn.scroll-left, .btn.scroll-right {
+        border: 1px solid black;
+        font-size: 0.8rem;
+        width: 2rem;
+        height: 2rem;
+        text-align: center;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .btn.scroll-left:hover, .btn.scroll-right:hover {
+        box-shadow: 0 0 5px black;
+        background-color: rgb(243, 243, 243);
+    }
+     
+    .arrow-left, .arrow-right {
         display: flex;
-        gap: 1.5rem;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        white-space: nowrap;
-        scrollbar-width: none; /*Firefox*/
+        align-items: center;
     }
 
-    .scrollable-filter .filters-container::-webkit-scrollbar {
-        display: none; /* Chrome */
+    .filter p {
+        text-wrap: nowrap;
     }
 
-    .scrollable-filter .filter {
-        flex: 0 0 auto;
-        font-size: 0.9rem;
-        color: #555;
-        cursor: pointer;
-        padding-bottom: 0.3rem;
-        border-bottom: 2px solid transparent;
+    @media (max-width: 768px) {
+        .btn.scroll-left, .btn.scroll-right {
+            display: none;
+        }
     }
 
-    .scrollable-filter .filter:hover {
-        color: black;
-        border-bottom: 2px solid black;
-    }
-
-    /* Arrow buttons styling */
-.scrollable-filter .scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: white;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 2;
-  padding: 0.4rem 0.6rem;
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(0,0,0,0.15);
-}
-
-.scrollable-filter .scroll-btn.left {
-  left: 5px;
-}
-
-.scrollable-filter .scroll-btn.right {
-  right: 5px;
-}
-
-@media (max-width: 768px) {
-  .scrollable-filter .scroll-btn {
-    display: none;
-  }
-}
 </style>
 
-<div class="filters-wrapper">
-  <button class="scroll-btn left" onclick="scrollFilters(-1)">&#10094;</button>
-
-  <div class="filters-container" id="filters">
-    <div class="filter">Amazing views</div>
-    <div class="filter">Beachfront</div>
-    <div class="filter">Cabins</div>
-    <div class="filter">Trending</div>
-    <div class="filter">Tiny homes</div>
-    <div class="filter">Farms</div>
-    <div class="filter">Castles</div>
-    <div class="filter">Camping</div>
-    <div class="filter">Arctic</div>
-    <div class="filter">Desert</div>
-    <div class="filter">Amazing views</div>
-    <div class="filter">Beachfront</div>
-    <div class="filter">Cabins</div>
-    <div class="filter">Trending</div>
-    <div class="filter">Tiny homes</div>
-    <div class="filter">Farms</div>
-    <div class="filter">Castles</div>
-    <div class="filter">Camping</div>
-    <div class="filter">Arctic</div>
-    <div class="filter">Desert</div>
-  </div>
-
-  <button class="scroll-btn right" onclick="scrollFilters(1)">&#10095;</button>
+<div class="row g-0">
+    <div class="col-lg-9 col-md-12">
+        <div class="row g-0">
+            <div class="arrow-left col-md-1">
+                <div class="btn scroll-left " onclick="scrollFilters(-1)">&#10094;</div>
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="filters mt-4 me-md-5">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <p>Trending</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <p>Rooms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <p>Iconic cities</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain"></i></div>
+                        <p>Mountains</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-person-swimming"></i></div>
+                        <p>Amazing pool</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-brands fa-fort-awesome"></i></div>
+                        <p>Castles</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-regular fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filter">
+                        <div><i class="fa-regular fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow-right col-md-1">
+                <div class="btn scroll-right" onclick="scrollFilters(1)">&#10095;</div>
+            </div>
+        </div>
+    </div>
+    <div class="tax-toggle col-lg-3">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after Taxes</label>
+        </div>
+    </div>
 </div>
-<script>
-  function scrollFilters(direction) {
-    const container = document.getElementById("filters");
-    const scrollAmount = 200;
 
-    container.scrollBy({
-      left: direction * scrollAmount,
-      behavior: "smooth"
-    });
-  }
+<script>
+    function scrollFilters(direction) {
+        const container = document.getElementsByClassName("filters")[0];
+        const scrollAmount = 200;
+
+        container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth"
+        });
+    }
+
+    const leftBtn = document.querySelector(".scroll-left");
+    const rightBtn = document.querySelector(".scroll-right");
+ 
+    const container = document.querySelector(".filters");
+
+    function updateFade() {
+        const scrollLeft = container.scrollLeft;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+
+        container.classList.remove("fade-left", "fade-right", "fade-both");
+
+
+        if (scrollLeft <= 0) {
+            // at start → only right fade
+            container.classList.add("fade-right");
+            leftBtn.style.opacity = 0.2;
+            rightBtn.style.opacity = 1;
+        } else if (scrollLeft >= maxScroll - 1) {
+            // at end → only left fade
+            container.classList.add("fade-left");
+            leftBtn.style.opacity = 1;
+            rightBtn.style.opacity = 0.2;
+        } else {
+            // middle → both fades
+            container.classList.add("fade-both");
+            leftBtn.style.opacity = 1;
+            rightBtn.style.opacity = 1;
+        }
+    }
+
+    container.addEventListener("scroll", updateFade);
+
+    // run on load
+    window.addEventListener("load", updateFade);
+
+
 </script>

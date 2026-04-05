@@ -1,0 +1,6 @@
+JSX = javascript extension syntax.
+babel : transpile
+npm create vite@latest OR Create-React-App
+npm run dev = to start the server
+localhost:5173 //to access our react app.
+we see our 
