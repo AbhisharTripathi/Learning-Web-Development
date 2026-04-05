@@ -47,3 +47,51 @@ module.exports.logoutUser = (req, res, next) => {
         }
     });
 };
+
+module.exports.renderUserEditForm = (req, res) => {
+    res.render("./users/edit.ejs");
+};
+
+module.exports.updateUser = async (req, res) => {
+    let { oldPassword, newPassword, email} = req.body;
+    let { user } = await req.user.authenticate(oldPassword);
+    if(!user) {
+        req.flash("error", "Password is incorrect.");
+        return res.redirect("/users/edit")
+    }
+
+    if(newPassword) {
+        await req.user.setPassword(newPassword);
+    }
+
+    if(email) {
+        req.user.email = email;
+    }
+
+    await req.user.save();
+    req.flash("success", "Profile updated successfully!");
+    res.redirect("/listings");
+};
+
+module.exports.deleteUser = async (req, res, next) => {
+
+    try {
+        let { oldPassword } = req.body;
+        let { user } = await req.user.authenticate(oldPassword);
+        if(!user) {
+            req.flash("error", "Password is incorrect.");
+            return res.redirect("/users/edit")
+        }
+
+        await User.findByIdAndDelete(user._id);
+        req.logout(err => {
+            if (err) return next(err);
+            req.session.destroy(); // remove session completely
+            // req.flash("success", "User Deleted.");
+            res.redirect("/listings");
+        });
+    }
+    catch(err) {
+        next(err);
+    }
+}

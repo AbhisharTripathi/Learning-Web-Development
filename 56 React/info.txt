@@ -3,4 +3,16 @@ babel : transpile
 npm create vite@latest OR Create-React-App
 npm run dev = to start the server
 localhost:5173 //to access our react app.
-we see our 
+
+Named export are useful when we want to export more than one values and want to import them with thier name. While default export are used to export a single value and import with the custom name.
+
+
+Rules for JSX
+- only one root element can be returned.
+- All tags should be closed. e.g. <img></img> OR <img/>
+- component name should be in capital like class name but other name should be in camelCase.
+
+class should be written className inside jsx.
+React fragments : <> </>
+
+webpack in react allows import and export.

@@ -63,10 +63,23 @@ const listingSchema = Schema({
     // }
 });
 
-listingSchema.post("findOneAndDelete", async (listing) => {
+listingSchema.post("findOneAndDelete", async function(listing) {
     try {
         if(listing) {
             await Review.deleteMany({_id: {$in: listing.reviews}});
+        }
+    }
+    catch(err) {
+        throw new ExpressError(400, err.message);
+    }
+});
+
+listingSchema.pre("deleteMany", async function() {//we can not use next inside async function middleware.
+    try {
+        let listings = await this.model.find(this.getFilter());
+        let allReviewIds = listings.flatMap(listing => (listing.reviews));
+        if(allReviewIds.length > 0) {
+            await Review.deleteMany({_id: {$in: allReviewIds}});
         }
     }
     catch(err) {

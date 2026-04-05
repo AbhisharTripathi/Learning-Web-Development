@@ -1,3 +1,4 @@
+/*
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -116,6 +117,20 @@ function App() {
       <section id="spacer"></section>
     </>
   )
+}
+
+export default App
+*/
+
+import "./App.css"
+import Title from "./Title.jsx";
+
+
+function App() {
+  return <>
+    <Title/>
+    <Title/>
+  </>
 }
 
 export default App

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { saveRedirectUrl } = require("../middlewares.js");
+const { saveRedirectUrl, isLoggedIn } = require("../middlewares.js");
 const userController = require("../controllers/user.js");
 
 router.route("/signup")
@@ -13,5 +13,14 @@ router.route("/login")
     .post(saveRedirectUrl, passport.authenticate("local", {failureRedirect: "/users/login", failureFlash: true}), userController.loginUser);//passport.authenticate() middleware is used in login to authenticate the user it takes two arguments first is strategy_name and second is options object.It logins the user and save the user information in req.user. It will also reset the req.session it means we can not store redirectUrl in req.session and get it directly.
 
 router.get("/logout", userController.logoutUser);
+
+router.get("/edit", isLoggedIn, userController.renderUserEditForm);
+
+router.route("/")
+    .patch( isLoggedIn, userController.updateUser)
+    .delete(isLoggedIn, userController.deleteUser);
+
+
+
 
 module.exports = router;
