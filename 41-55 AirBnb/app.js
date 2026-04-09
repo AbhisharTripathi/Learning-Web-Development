@@ -31,7 +31,7 @@ main().then(() => {
     console.log(err);
 });
 async function main() {
-    return await mongoose.connect(dbUrl);
+    return await mongoose.connect(dbUrl, {family: 4});
 }
 
 app.engine("ejs", ejsMate);
