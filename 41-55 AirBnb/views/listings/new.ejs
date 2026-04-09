@@ -33,6 +33,9 @@
                     <input id="image" name="listing[image]" type="file" class="form-control" required>
                 </div>
                 <div class="mb-3">
+                    <%- include("../includes/filters.ejs") %>
+                </div>
+                <div class="mb-3">
                     <label for="description" class="form-label">Description :-</label>
                     <textarea id="description" name="listing[description]" rows="4" placeholder="Description about the property." class="form-control" required></textarea>
                 </div>

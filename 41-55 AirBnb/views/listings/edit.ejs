@@ -6,7 +6,7 @@
         <div class="text-center text-md-start ">
             <img src="<%= listing.image.url %>" alt="listing image" class="edit-img mb-3 col-12 col-md-5">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-12">
             <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title : </label>
@@ -32,6 +32,9 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Image <sup>(optional)</sup> : </label>
                     <input id="image" name="listing[image]" type="file" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <%- include("../includes/filters.ejs") %>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description :-</label>

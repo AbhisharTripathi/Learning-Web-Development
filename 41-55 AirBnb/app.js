@@ -19,6 +19,7 @@ const User = require("./model/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const filterRouter = require("./routes/filter.js");
 
 const dns = require("dns");
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
@@ -112,6 +113,9 @@ app.use("/listings/:id/reviews", reviewRouter);
 
 //Users routes
 app.use("/users", userRouter);
+
+//filter api
+app.use("/api/filter", filterRouter);
 
 //Page not found
 app.use((req, res, next) => {

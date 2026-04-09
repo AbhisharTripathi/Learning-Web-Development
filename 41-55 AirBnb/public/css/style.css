@@ -4,8 +4,9 @@
 
 body {
     font-family: "Helvetica Neue", Arial;
-    display: flex;
-    flex-direction: column;
+}
+
+body > div {
     min-height: 100vh;
 }
 
@@ -206,7 +207,7 @@ body {
     background-color: #fe424d;
     color: white;
     width: 10rem;
-    margin-right: 3rem;
+    /* margin-right: 3rem; */
     font-weight: 500;
     letter-spacing: 0.08em;
 }

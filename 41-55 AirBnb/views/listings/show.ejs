@@ -1,19 +1,20 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
     <div class="row mt-4">
-        <h3 class="mb-4 col-md-8"><%= listing.title %></h3>
-        <div class="text-center text-md-start mb-3">
+        <h3 class="mb-4 col col-12"><%= listing.title %></h3>
+        <div class="text-center text-md-start mb-3 col-12 col">
                 <img src="<%= listing.image.url %>" alt="listing image" class="show-img col-12 col-md-5">
         </div>
-        <div class="details mb-3">
+        <div class="details mb-3 col col-8">
             <span class="details-heading">Owner: </span><i><%= listing.owner.username %></i><br>
             <span class="details-heading">Description: </span><%= listing.description %><br>
+            <span class="details-heading">Categories: </span><%= listing.categories.join(", ") %><br>
             <span class="details-heading">Location: </span><%= listing.location %><br>
             <span class="details-heading">Country: </span><%= listing.country %><br>
             <span class="details-heading">Price: </span>&#8377; <%= listing.price.toLocaleString("en-IN") %></p><!--To convert number into local comma separated string-->
         </div>
         <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
-            <div class="show-btns mb-3 col-md-8">
+            <div class="show-btns mb-3 col-md-5 gap-3 d-flex justify-content-around">
                 <div>
                     <a href="/listings/<%= listing._id %>/edit"><button class="btn show-btn col-2">Edit</button></a>
                 </div>
