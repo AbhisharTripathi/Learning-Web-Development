@@ -10,15 +10,6 @@ body > div {
     min-height: 100vh;
 }
 
-/* .navbar-collapse.show,
-.navbar-collapse.collapsing {
-    background: linear-gradient(
-        to bottom, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgb(221, 212, 212) 100%
-    );
-} */
-
 @media (max-width: 767.98px) {
     /* Target the container when it's opening or open */
     .navbar-collapse.collapsing,
@@ -29,15 +20,11 @@ body > div {
         right: 0;
         width: 100vw;    /* Forces 100% viewport width */
         
-        /* Your requested white-to-grey gradient */
         background: linear-gradient(
             to bottom, 
             rgba(255, 255, 255, 1) 0%, 
             rgba(212, 212, 212, 1) 100%
         );
-        
-        /* Instant appearance - no background fade */
-        /* transition: background 0s !important; */
         
         /* Fixes content touching the screen edges */
         padding: 1rem 1.5rem; 
@@ -48,7 +35,7 @@ body > div {
         z-index: 1050;   /* Ensures it stays above other page elements */
     }
 
-    /* Optional: Space out the nav items for easier clicking on mobile */
+    /* Space out the nav items for easier clicking on mobile */
     .navbar-nav {
         margin-bottom: 1rem;
     }
@@ -67,6 +54,10 @@ body > div {
 .navbar-brand {
     font-size: 2.5rem;
     color: #fe424d !important;
+}
+
+.navbar-brand span {
+    font-size: 1.5rem;
 }
 
 .nav-link {

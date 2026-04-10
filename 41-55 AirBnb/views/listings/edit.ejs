@@ -49,3 +49,12 @@
         </div>
     </div>
 </body>
+<script>
+    let allFilters = document.querySelectorAll(".filters .filter");
+    let categories = <%- JSON.stringify(listing.categories) %>;
+    for(let filter of allFilters) {
+        if(categories.includes(filter.children[0].children[1].innerText)){
+            filter.children[0].children[2].checked = true;
+        }
+    }
+</script>
