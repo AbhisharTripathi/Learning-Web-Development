@@ -28,7 +28,7 @@ body > div {
         
         transition-timing-function: linear;
         /* Fixes content touching the screen edges */
-        padding: 1rem 1.5rem; 
+        padding: 0.75rem 1.5rem; 
         
         /* shadow adds depth so it looks like it's over the content */
         box-shadow: 0 4px 10px rgba(0,0,0,0.25);
@@ -146,6 +146,7 @@ body > div {
     background-color: #fe424d;
     color: white;
     font-weight: 500;
+    width: 10rem;
     letter-spacing: 0.08em;
 }
 
@@ -158,6 +159,7 @@ body > div {
 .edit-form-btn {
     background-color: #fe424d;
     color: white;
+    width: 10rem;
     font-weight: 500;
     letter-spacing: 0.08em;
 }

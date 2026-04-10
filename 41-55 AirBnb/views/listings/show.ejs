@@ -14,7 +14,7 @@
             <span class="details-heading">Price: </span>&#8377; <%= listing.price.toLocaleString("en-IN") %></p><!--To convert number into local comma separated string-->
         </div>
         <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
-            <div class="show-btns mb-3 col-md-5 gap-3 d-flex justify-content-around">
+            <div class="show-btns mb-3 col-md-5 d-flex justify-content-evenly">
                 <div>
                     <a href="/listings/<%= listing._id %>/edit"><button class="btn show-btn col-2">Edit</button></a>
                 </div>
