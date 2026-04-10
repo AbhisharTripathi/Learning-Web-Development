@@ -18,19 +18,20 @@ body > div {
         top: 100%;       /* Starts exactly at the bottom of the top bar */
         left: 0;
         right: 0;
-        width: 100vw;    /* Forces 100% viewport width */
+        /* width: 100vw;    Forces 100% viewport width */
         
         background: linear-gradient(
             to bottom, 
             rgba(255, 255, 255, 1) 0%, 
-            rgba(212, 212, 212, 1) 100%
+            rgb(204, 202, 202) 100%
         );
         
+        transition-timing-function: linear;
         /* Fixes content touching the screen edges */
         padding: 1rem 1.5rem; 
         
         /* shadow adds depth so it looks like it's over the content */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
         
         z-index: 1050;   /* Ensures it stays above other page elements */
     }
