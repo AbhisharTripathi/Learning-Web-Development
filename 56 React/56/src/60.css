@@ -1,0 +1,33 @@
+.lottery {
+    background-color: white;
+    border: 2px solid orangered;
+    border-radius: 3rem;
+    margin: 2rem;
+}
+
+.lottery h2{
+    color: black;
+    margin: 0.5rem;
+}
+
+.lottery span {
+    /* display: inline-block; */
+    padding: 0.5rem 3rem;
+    color: black;
+    border: 1px solid black;
+    border-radius: 3rem;
+}
+
+.lottery .ticket {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.lottery .play button{
+    border: 1px solid black;
+    height: 3rem;
+    width: 5rem;
+    border-radius: 2rem;
+}

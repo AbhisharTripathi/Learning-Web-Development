@@ -123,14 +123,35 @@ export default App
 */
 
 import "./App.css"
-import Title from "./Title.jsx";
+import Product from "./Product.jsx";
+import Greet from "./Greet.jsx";
+import ProductList from "./ProductList.jsx";
+import { Button1, Counter } from "./58.jsx";
+import { LudoBoard, Todo } from "./59.jsx";
+import { Lottery } from "./60.jsx";
 
 
 function App() {
-  return <>
-    <Title/>
-    <Title/>
-  </>
+  return (
+    <>
+      {/* the first price will be passed as string but the second i.e. laptop's price is passed as number. if we want to pass any props that is other than string (i.e. array, object) we pass it inside the curly braces. */}
+      <Product title="Phone" price="20000" />
+      <Product title="Laptop" price={10000} />
+      <Product title="Tablet" />
+      < Greet name="Ram" textColor="orange" />
+      < Greet name="Sita" textColor="blue" />
+
+      <ProductList />
+
+      <Button1 />
+      <Counter />
+
+      <LudoBoard />
+      <Todo />
+
+      <Lottery />
+    </>
+  );
 }
 
 export default App

@@ -1,0 +1,19 @@
+.Product {
+    --border-color: black;
+    --text-color: black;
+    --background: white;
+}
+
+.Product.dark {
+    --border-color: white;
+    --text-color: white;
+    --background: black;
+}
+
+.Product {
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    background-color: var(--background);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,38 @@
+.ludoBoard button {
+    width: 10rem;
+    height: 3rem;
+    color: black;
+}
+
+.todo {
+    background-color: white;
+    border: 2px solid orangered;
+    border-radius: 3rem;
+    margin: 2rem;
+}
+
+.todo h2 {
+    color: black;
+}
+.todo button {
+    color: white;
+    background-color: black;
+    padding: 0.2rem 1rem;
+
+}
+
+.todo input {
+    background-color: rgb(181, 240, 220);
+    color: black;
+}
+
+.todo li {
+    display: flex;
+    gap: 2rem;
+    margin-left: 2rem;
+}
+
+.todo li > span {
+    color: black;
+    font-weight: bold;
+}

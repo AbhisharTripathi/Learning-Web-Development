@@ -1,0 +1,20 @@
+.AmazonProduct {
+    display: inline-block;
+    border: 2px solid yellowgreen;
+    margin: 1rem;
+    border-radius: 2rem;
+    width: 15rem;
+}
+
+li {
+    text-align:start;
+}
+
+h3 {
+    padding: 1rem;
+}
+
+.price {
+    background-color: yellowgreen;
+    border-radius: 0 0 2rem 2rem;
+}
