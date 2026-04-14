@@ -131,6 +131,7 @@ import { LudoBoard, Todo } from "./59.jsx";
 import { Lottery } from "./60.jsx";
 import { Form } from "./61.jsx";
 import CommentsForm from "./CommentsForm.jsx";
+import Joker from "./Joker.jsx";
 
 
 function App() {
@@ -158,9 +159,11 @@ function App() {
     <Lottery />
 
     <Form />
-    */}
 
     <CommentsForm />
+    */}
+
+    <Joker />
 
     </>
   );
