@@ -129,27 +129,39 @@ import ProductList from "./ProductList.jsx";
 import { Button1, Counter } from "./58.jsx";
 import { LudoBoard, Todo } from "./59.jsx";
 import { Lottery } from "./60.jsx";
+import { Form } from "./61.jsx";
+import CommentsForm from "./CommentsForm.jsx";
 
 
 function App() {
   return (
     <>
-      {/* the first price will be passed as string but the second i.e. laptop's price is passed as number. if we want to pass any props that is other than string (i.e. array, object) we pass it inside the curly braces. */}
-      <Product title="Phone" price="20000" />
-      <Product title="Laptop" price={10000} />
-      <Product title="Tablet" />
-      < Greet name="Ram" textColor="orange" />
-      < Greet name="Sita" textColor="blue" />
+    {/*
+    {
+    // the first price will be passed as string but the second i.e. laptop's price is passed as number. if we want to pass any props that is other than string (i.e. array, object) we pass it inside the curly braces. 
+    }
 
-      <ProductList />
+    <Product title="Phone" price="20000" />
+    <Product title="Laptop" price={10000} />
+    <Product title="Tablet" />
+    < Greet name="Ram" textColor="orange" />
+    < Greet name="Sita" textColor="blue" />
 
-      <Button1 />
-      <Counter />
+    <ProductList />
 
-      <LudoBoard />
-      <Todo />
+    <Button1 />
+    <Counter />
 
-      <Lottery />
+    <LudoBoard />
+    <Todo />
+
+    <Lottery />
+
+    <Form />
+    */}
+
+    <CommentsForm />
+
     </>
   );
 }
