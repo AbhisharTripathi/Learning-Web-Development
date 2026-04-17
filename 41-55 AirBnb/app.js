@@ -35,13 +35,13 @@ async function main() {
     return await mongoose.connect(dbUrl, {family: 4});
 }
 
-app.engine("ejs", ejsMate);
+app.engine("ejs", ejsMate); //this provides <% layout() %> and <%- body %>
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs"); //this will make the render to look in views folder to find the ejs file.
+app.set("views", path.join(__dirname, "views")); //if your app runs from a different dir this ensures express always find the corret folder.
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, "public")));//this will make express to set the public folder for static files and matches all request with the files if it matches response is send if not then moved forward.
+app.use(express.urlencoded({extended: true}));//this makes the form data available in req.body in js object format also extended true helps in parsing form data like listing[title]=something&listing[location]=something
 app.use(methodOverride("_method"));
 // This tells Express to serve everything inside the "bootstrap-5.3.8-dist" folder
 app.use('/bootstrap', express.static(path.join(__dirname, 'bootstrap-5.3.8-dist')));
@@ -49,9 +49,9 @@ app.use('/bootstrap', express.static(path.join(__dirname, 'bootstrap-5.3.8-dist'
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: process.env.SECRET 
+        secret: process.env.SECRET //used to ecrypt the data stored on mongodb session
     },
-    touchAfter: 24 * 60 * 60
+    touchAfter: 24 * 60 * 60 //update sessions in db once per 24 hours(for read request) for session data changes it does not block anything update happens normally.
 });
 
 store.on("error", (err) => {
@@ -60,26 +60,34 @@ store.on("error", (err) => {
 
 const sessionOptions = {
     store: store,
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
+    secret: process.env.SECRET,//used to sighn the session id cookie.
+    resave: false, //if req.session is saved(update) again in db even if nothing is changed. 
+    saveUninitialized: true, //empty session will also get saved.
     cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,//it gives fixed time to destroy the cookie in browser automatically.
+        maxAge: 7 * 24 * 60 * 60 * 1000,//this gives the relative time to do the same use only one.
+        httpOnly: true //prevents js access(document.cookie)
     }
 };
 
-app.use(session(sessionOptions));
+app.use(session(sessionOptions));//reads cookies -> fetch session from mongodb -> attaches it to req.session
 app.use(flash());//To use flash we need session.
 
 //to use passport we nedd session.
 app.use(passport.initialize());//This will initialize the passport for every request.
 app.use(passport.session());//this middleware will check if the request is passed by the same user. A web application needs the ability to identify the user as they browse from page to page. This series of requests and responses, each associated with the same user is known as session.
-passport.use(new PassportLocal(User.authenticate()));//use static authenticate method of model in PassportLocal
+passport.use(new PassportLocal(User.authenticate()));//use static authenticate method of model in PassportLocal, tell passport how to authenticate username + password using the user model.
 
 passport.serializeUser(User.serializeUser()); //it serialize User into the session.
 passport.deserializeUser(User.deserializeUser()); //it deserialize user into the session.
+/*
+if you do not use passport-local-mongoose you have to do these things mannually.
+👉 password hashing (bcrypt)
+👉 login verification
+👉 serializeUser
+👉 deserializeUser
+👉 user registration logic
+*/
 
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash("success");
